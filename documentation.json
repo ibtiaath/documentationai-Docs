@@ -81,7 +81,7 @@
             "group": "api",
             "pages": [],
             "icon": "a-arrow-down",
-            "openapi": "api-reference/openapi.v3.json"
+            "openapi": "api-reference/openapi.v3.fixed.json"
           }
         ]
       },
