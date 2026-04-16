@@ -51,6 +51,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedCouponListList'
           description: ''
+      summary: Admin Coupons List
     post:
       operationId: admin_coupons_create
       description: Admin CRUD for coupons.
@@ -78,6 +79,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/CouponDetail'
           description: ''
+      summary: Admin Coupons Create
   /api/v1/admin/coupons/{id}/:
     get:
       operationId: admin_coupons_retrieve
@@ -101,6 +103,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/CouponDetail'
           description: ''
+      summary: Admin Coupons Retrieve
     put:
       operationId: admin_coupons_update
       description: Admin CRUD for coupons.
@@ -135,6 +138,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/CouponDetail'
           description: ''
+      summary: Admin Coupons Update
     patch:
       operationId: admin_coupons_partial_update
       description: Admin CRUD for coupons.
@@ -168,6 +172,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/CouponDetail'
           description: ''
+      summary: Admin Coupons Partial Update
     delete:
       operationId: admin_coupons_destroy
       description: Admin CRUD for coupons.
@@ -186,6 +191,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Admin Coupons Destroy
   /api/v1/admin/coupons/{id}/toggle_status/:
     post:
       operationId: admin_coupons_toggle_status_create
@@ -221,6 +227,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/CouponDetail'
           description: ''
+      summary: Admin Coupons Toggle Status Create
   /api/v1/admin/coupons/{id}/usage_history/:
     get:
       operationId: admin_coupons_usage_history_retrieve
@@ -244,6 +251,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/CouponDetail'
           description: ''
+      summary: Admin Coupons Usage History Retrieve
   /api/v1/admin/coupons/stats/:
     get:
       operationId: admin_coupons_stats_retrieve
@@ -260,6 +268,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/CouponDetail'
           description: ''
+      summary: Admin Coupons Stats Retrieve
   /api/v1/admin/coupons/usage_logs/:
     get:
       operationId: admin_coupons_usage_logs_retrieve
@@ -276,6 +285,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/CouponDetail'
           description: ''
+      summary: Admin Coupons Usage Logs Retrieve
   /api/v1/admin/gift-codes/:
     get:
       operationId: admin_gift_codes_list
@@ -354,6 +364,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedGiftCodeListList'
           description: ''
+      summary: Admin Gift Codes List
     post:
       operationId: admin_gift_codes_create
       description: Create single or batch gift codes.
@@ -381,6 +392,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/GiftCodeCreate'
           description: ''
+      summary: Admin Gift Codes Create
   /api/v1/admin/gift-codes/{id}/:
     get:
       operationId: admin_gift_codes_retrieve
@@ -417,6 +429,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/GiftCode'
           description: ''
+      summary: Admin Gift Codes Retrieve
     put:
       operationId: admin_gift_codes_update
       description: 'Gift Code Management (Admin Only)
@@ -464,6 +477,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/GiftCode'
           description: ''
+      summary: Admin Gift Codes Update
     patch:
       operationId: admin_gift_codes_partial_update
       description: 'Gift Code Management (Admin Only)
@@ -510,6 +524,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/GiftCode'
           description: ''
+      summary: Admin Gift Codes Partial Update
     delete:
       operationId: admin_gift_codes_destroy
       description: Delete a gift code and invalidate stats cache.
@@ -528,6 +543,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Admin Gift Codes Destroy
   /api/v1/admin/gift-codes/{id}/cancel/:
     post:
       operationId: admin_gift_codes_cancel_create
@@ -563,6 +579,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/GiftCode'
           description: ''
+      summary: Admin Gift Codes Cancel Create
   /api/v1/admin/gift-codes/{id}/export/:
     get:
       operationId: admin_gift_codes_export_retrieve
@@ -589,6 +606,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/GiftCode'
           description: ''
+      summary: Admin Gift Codes Export Retrieve
   /api/v1/admin/gift-codes/{id}/reveal_pin/:
     post:
       operationId: admin_gift_codes_reveal_pin_create
@@ -629,6 +647,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/GiftCode'
           description: ''
+      summary: Admin Gift Codes Reveal Pin Create
   /api/v1/admin/gift-codes/batches/:
     get:
       operationId: admin_gift_codes_batches_retrieve
@@ -646,6 +665,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/GiftCode'
           description: ''
+      summary: Admin Gift Codes Batches Retrieve
   /api/v1/admin/gift-codes/export/:
     post:
       operationId: admin_gift_codes_export_create
@@ -685,6 +705,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/GiftCode'
           description: ''
+      summary: Admin Gift Codes Export Create
   /api/v1/admin/gift-codes/stats/:
     get:
       operationId: admin_gift_codes_stats_retrieve
@@ -701,6 +722,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/GiftCode'
           description: ''
+      summary: Admin Gift Codes Stats Retrieve
   /api/v1/analytics/api-logs/:
     get:
       operationId: analytics_api_logs_retrieve
@@ -727,6 +749,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Analytics Api Logs Retrieve
   /api/v1/analytics/api-logs/{id}/:
     get:
       operationId: analytics_api_logs_retrieve_2
@@ -748,6 +771,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Analytics Api Logs Retrieve 2
   /api/v1/analytics/api-logs/statistics/:
     get:
       operationId: analytics_api_logs_statistics_retrieve
@@ -763,6 +787,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Analytics Api Logs Statistics Retrieve
   /api/v1/analytics/devices/:
     get:
       operationId: analytics_devices_retrieve
@@ -778,6 +803,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Analytics Devices Retrieve
   /api/v1/analytics/logs/:
     get:
       operationId: analytics_logs_retrieve
@@ -793,6 +819,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Analytics Logs Retrieve
   /api/v1/analytics/orders/counts/:
     get:
       operationId: analytics_orders_counts_retrieve
@@ -808,6 +835,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Analytics Orders Counts Retrieve
   /api/v1/analytics/sessions/:
     get:
       operationId: analytics_sessions_retrieve
@@ -823,6 +851,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Analytics Sessions Retrieve
   /api/v1/analytics/sessions/{session_token}/end/:
     post:
       operationId: analytics_sessions_end_create
@@ -845,6 +874,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Analytics Sessions End Create
   /api/v1/analytics/statistics/:
     get:
       operationId: analytics_statistics_retrieve
@@ -871,6 +901,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Analytics Statistics Retrieve
   /api/v1/analytics/statistics/leaderboards/:
     get:
       operationId: analytics_statistics_leaderboards_retrieve
@@ -886,6 +917,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Analytics Statistics Leaderboards Retrieve
   /api/v1/analytics/statistics/overview/:
     get:
       operationId: analytics_statistics_overview_retrieve
@@ -901,6 +933,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Analytics Statistics Overview Retrieve
   /api/v1/analytics/track/:
     post:
       operationId: analytics_track_create
@@ -929,6 +962,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Analytics Track Create
   /api/v1/analytics/track/batch/:
     post:
       operationId: analytics_track_batch_create
@@ -945,6 +979,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Analytics Track Batch Create
   /api/v1/banners/:
     get:
       operationId: banners_list
@@ -995,6 +1030,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedBannerList'
           description: ''
+      summary: Banners List
     post:
       operationId: banners_create
       description: 'Banner Management (Admin Only)
@@ -1027,6 +1063,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Banner'
           description: ''
+      summary: Banners Create
   /api/v1/banners-public/:
     get:
       operationId: banners_public_list
@@ -1074,6 +1111,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedBannerPublicList'
           description: ''
+      summary: Banners Public List
   /api/v1/banners-public/{id}/:
     get:
       operationId: banners_public_retrieve
@@ -1102,6 +1140,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/BannerPublic'
           description: ''
+      summary: Banners Public Retrieve
   /api/v1/banners/{id}/:
     get:
       operationId: banners_retrieve
@@ -1130,6 +1169,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Banner'
           description: ''
+      summary: Banners Retrieve
     put:
       operationId: banners_update
       description: 'Banner Management (Admin Only)
@@ -1169,6 +1209,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Banner'
           description: ''
+      summary: Banners Update
     patch:
       operationId: banners_partial_update
       description: 'Banner Management (Admin Only)
@@ -1207,6 +1248,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Banner'
           description: ''
+      summary: Banners Partial Update
     delete:
       operationId: banners_destroy
       description: 'Banner Management (Admin Only)
@@ -1230,6 +1272,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Banners Destroy
   /api/v1/coupons/validate/:
     post:
       operationId: coupons_validate_create
@@ -1244,6 +1287,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Coupons Validate Create
   /api/v1/esim/admin/airalo-balance/:
     get:
       operationId: esim_admin_airalo_balance_retrieve
@@ -1259,6 +1303,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Esim Admin Airalo Balance Retrieve
   /api/v1/esim/admin/config/:
     get:
       operationId: esim_admin_config_retrieve
@@ -1276,6 +1321,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Esim Admin Config Retrieve
     put:
       operationId: esim_admin_config_update
       description: 'Admin: Read/update eSIM configuration (singleton).
@@ -1292,6 +1338,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Esim Admin Config Update
   /api/v1/esim/admin/orders/:
     get:
       operationId: esim_admin_orders_retrieve
@@ -1307,6 +1354,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Esim Admin Orders Retrieve
   /api/v1/esim/admin/orders/{order_reference}/:
     get:
       operationId: esim_admin_orders_retrieve_2
@@ -1330,6 +1378,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Esim Admin Orders Retrieve 2
     patch:
       operationId: esim_admin_orders_partial_update
       description: 'Admin: Update eSIM order status and/or add notes.'
@@ -1347,6 +1396,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Esim Admin Orders Partial Update
   /api/v1/esim/admin/orders/stats/:
     get:
       operationId: esim_admin_orders_stats_retrieve
@@ -1364,6 +1414,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Esim Admin Orders Stats Retrieve
   /api/v1/esim/countries/:
     get:
       operationId: esim_countries_retrieve
@@ -1382,6 +1433,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Esim Countries Retrieve
   /api/v1/esim/orders/{order_reference}/:
     get:
       operationId: esim_orders_retrieve
@@ -1405,6 +1457,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Esim Orders Retrieve
   /api/v1/esim/orders/{order_reference}/usage/:
     get:
       operationId: esim_orders_usage_retrieve
@@ -1428,6 +1481,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Esim Orders Usage Retrieve
   /api/v1/esim/orders/create/:
     post:
       operationId: esim_orders_create_create
@@ -1445,6 +1499,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Esim Orders Create Create
   /api/v1/esim/orders/my/:
     get:
       operationId: esim_orders_my_retrieve
@@ -1460,6 +1515,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Esim Orders My Retrieve
   /api/v1/esim/packages/:
     get:
       operationId: esim_packages_retrieve
@@ -1478,6 +1534,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Esim Packages Retrieve
   /api/v1/esim/webhook/airalo/:
     post:
       operationId: esim_webhook_airalo_create
@@ -1495,6 +1552,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Esim Webhook Airalo Create
   /api/v1/fcm-tokens/:
     get:
       operationId: fcm_tokens_list
@@ -1568,6 +1626,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedFCMTokenList'
           description: ''
+      summary: Fcm Tokens List
     post:
       operationId: fcm_tokens_create
       description: 'FCM Token Management
@@ -1600,6 +1659,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/FCMToken'
           description: ''
+      summary: Fcm Tokens Create
   /api/v1/fcm-tokens/{id}/:
     get:
       operationId: fcm_tokens_retrieve
@@ -1628,6 +1688,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/FCMToken'
           description: ''
+      summary: Fcm Tokens Retrieve
     put:
       operationId: fcm_tokens_update
       description: 'FCM Token Management
@@ -1667,6 +1728,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/FCMToken'
           description: ''
+      summary: Fcm Tokens Update
     patch:
       operationId: fcm_tokens_partial_update
       description: 'FCM Token Management
@@ -1705,6 +1767,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/FCMToken'
           description: ''
+      summary: Fcm Tokens Partial Update
     delete:
       operationId: fcm_tokens_destroy
       description: 'FCM Token Management
@@ -1728,6 +1791,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Fcm Tokens Destroy
   /api/v1/fcm-tokens/register/:
     post:
       operationId: fcm_tokens_register_create
@@ -1766,6 +1830,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/FCMToken'
           description: ''
+      summary: Fcm Tokens Register Create
   /api/v1/files/confirm-upload/:
     post:
       operationId: files_confirm_upload_create
@@ -1781,6 +1846,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Files Confirm Upload Create
   /api/v1/files/delete/:
     delete:
       operationId: files_delete_destroy
@@ -1796,6 +1862,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Files Delete Destroy
   /api/v1/files/presigned-download/:
     post:
       operationId: files_presigned_download_create
@@ -1811,6 +1878,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Files Presigned Download Create
   /api/v1/files/presigned-upload/:
     post:
       operationId: files_presigned_upload_create
@@ -1826,6 +1894,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Files Presigned Upload Create
   /api/v1/files/upload-types/:
     get:
       operationId: files_upload_types_retrieve
@@ -1842,6 +1911,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Files Upload Types Retrieve
   /api/v1/flights/admin/analytics/:
     get:
       operationId: flights_admin_analytics_retrieve
@@ -1866,6 +1936,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Admin Analytics Retrieve
   /api/v1/flights/admin/bookings/:
     get:
       operationId: flights_admin_bookings_list
@@ -1910,6 +1981,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedFlightBookingListList'
           description: ''
+      summary: Flights Admin Bookings List
   /api/v1/flights/admin/bookings/{booking_reference}/:
     get:
       operationId: flights_admin_bookings_retrieve
@@ -1931,6 +2003,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Admin Bookings Retrieve
   /api/v1/flights/admin/bookings/{booking_reference}/status/:
     patch:
       operationId: flights_admin_bookings_status_partial_update
@@ -1955,6 +2028,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Admin Bookings Status Partial Update
   /api/v1/flights/admin/exchange-rates/:
     get:
       operationId: flights_admin_exchange_rates_list
@@ -2001,6 +2075,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedExchangeRateList'
           description: ''
+      summary: Flights Admin Exchange Rates List
     post:
       operationId: flights_admin_exchange_rates_create
       description: 'List and create exchange rates (admin only).
@@ -2033,6 +2108,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExchangeRateCreate'
           description: ''
+      summary: Flights Admin Exchange Rates Create
   /api/v1/flights/admin/exchange-rates/{id}/:
     get:
       operationId: flights_admin_exchange_rates_retrieve
@@ -2062,6 +2138,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExchangeRate'
           description: ''
+      summary: Flights Admin Exchange Rates Retrieve
     put:
       operationId: flights_admin_exchange_rates_update
       description: 'Get, update, or delete an exchange rate.
@@ -2102,6 +2179,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExchangeRateCreate'
           description: ''
+      summary: Flights Admin Exchange Rates Update
     patch:
       operationId: flights_admin_exchange_rates_partial_update
       description: 'Get, update, or delete an exchange rate.
@@ -2141,6 +2219,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExchangeRateCreate'
           description: ''
+      summary: Flights Admin Exchange Rates Partial Update
     delete:
       operationId: flights_admin_exchange_rates_destroy
       description: 'Get, update, or delete an exchange rate.
@@ -2165,6 +2244,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Flights Admin Exchange Rates Destroy
   /api/v1/flights/admin/service-fees/:
     get:
       operationId: flights_admin_service_fees_list
@@ -2211,6 +2291,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedFlightServiceFeeList'
           description: ''
+      summary: Flights Admin Service Fees List
     post:
       operationId: flights_admin_service_fees_create
       description: 'List and create service fees (admin only).
@@ -2243,6 +2324,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/FlightServiceFeeCreate'
           description: ''
+      summary: Flights Admin Service Fees Create
   /api/v1/flights/admin/service-fees/{id}/:
     get:
       operationId: flights_admin_service_fees_retrieve
@@ -2272,6 +2354,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/FlightServiceFee'
           description: ''
+      summary: Flights Admin Service Fees Retrieve
     put:
       operationId: flights_admin_service_fees_update
       description: 'Get, update, or delete a service fee.
@@ -2312,6 +2395,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/FlightServiceFeeCreate'
           description: ''
+      summary: Flights Admin Service Fees Update
     patch:
       operationId: flights_admin_service_fees_partial_update
       description: 'Get, update, or delete a service fee.
@@ -2351,6 +2435,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/FlightServiceFeeCreate'
           description: ''
+      summary: Flights Admin Service Fees Partial Update
     delete:
       operationId: flights_admin_service_fees_destroy
       description: 'Get, update, or delete a service fee.
@@ -2375,6 +2460,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Flights Admin Service Fees Destroy
   /api/v1/flights/admin/transactions/:
     get:
       operationId: flights_admin_transactions_list
@@ -2432,6 +2518,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedFlightTransactionList'
           description: ''
+      summary: Flights Admin Transactions List
   /api/v1/flights/admin/transactions/stats/:
     get:
       operationId: flights_admin_transactions_stats_retrieve
@@ -2451,6 +2538,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Admin Transactions Stats Retrieve
   /api/v1/flights/airports/:
     get:
       operationId: flights_airports_retrieve
@@ -2467,6 +2555,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Airports Retrieve
   /api/v1/flights/airports/{iata_code}/:
     get:
       operationId: flights_airports_retrieve_2
@@ -2489,6 +2578,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Airports Retrieve 2
   /api/v1/flights/airports/popular/:
     get:
       operationId: flights_airports_popular_retrieve
@@ -2505,6 +2595,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Airports Popular Retrieve
   /api/v1/flights/bookings/:
     get:
       operationId: flights_bookings_retrieve
@@ -2522,6 +2613,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Bookings Retrieve
     post:
       operationId: flights_bookings_create
       description: 'List user''s bookings or create a new booking.
@@ -2538,6 +2630,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Bookings Create
   /api/v1/flights/bookings/{booking_reference}/:
     get:
       operationId: flights_bookings_retrieve_2
@@ -2559,6 +2652,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Bookings Retrieve 2
   /api/v1/flights/bookings/{booking_reference}/cancel/:
     post:
       operationId: flights_bookings_cancel_create
@@ -2591,6 +2685,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Bookings Cancel Create
   /api/v1/flights/bookings/{booking_reference}/passengers/:
     get:
       operationId: flights_bookings_passengers_retrieve
@@ -2616,6 +2711,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Bookings Passengers Retrieve
     put:
       operationId: flights_bookings_passengers_update
       description: 'Update all passengers at once.
@@ -2638,6 +2734,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Bookings Passengers Update
   /api/v1/flights/bookings/{booking_reference}/pay/wallet/:
     post:
       operationId: flights_bookings_pay_wallet_create
@@ -2672,6 +2769,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Bookings Pay Wallet Create
   /api/v1/flights/bookings/{booking_reference}/payment-eligibility/:
     get:
       operationId: flights_bookings_payment_eligibility_retrieve
@@ -2693,6 +2791,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Bookings Payment Eligibility Retrieve
   /api/v1/flights/bookings/{booking_reference}/revert-payment/:
     post:
       operationId: flights_bookings_revert_payment_create
@@ -2721,6 +2820,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Bookings Revert Payment Create
   /api/v1/flights/bookings/{booking_reference}/ticket/:
     get:
       operationId: flights_bookings_ticket_retrieve
@@ -2760,6 +2860,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Bookings Ticket Retrieve
   /api/v1/flights/exchange-rate/:
     get:
       operationId: flights_exchange_rate_retrieve
@@ -2776,6 +2877,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Exchange Rate Retrieve
   /api/v1/flights/manager/bookings/:
     get:
       operationId: flights_manager_bookings_list
@@ -2821,6 +2923,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedFlightBookingManagerListList'
           description: ''
+      summary: Flights Manager Bookings List
   /api/v1/flights/manager/bookings/{booking_reference}/:
     get:
       operationId: flights_manager_bookings_retrieve
@@ -2841,6 +2944,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Manager Bookings Retrieve
   /api/v1/flights/manager/bookings/{booking_reference}/status/:
     patch:
       operationId: flights_manager_bookings_status_partial_update
@@ -2863,6 +2967,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Manager Bookings Status Partial Update
   /api/v1/flights/manager/bookings/counts/:
     get:
       operationId: flights_manager_bookings_counts_retrieve
@@ -2875,6 +2980,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Manager Bookings Counts Retrieve
   /api/v1/flights/offers/{offer_id}/:
     get:
       operationId: flights_offers_retrieve
@@ -2899,6 +3005,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Offers Retrieve
   /api/v1/flights/search/:
     post:
       operationId: flights_search_create
@@ -2915,6 +3022,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Search Create
   /api/v1/flights/search/{search_id}/status/:
     get:
       operationId: flights_search_status_retrieve
@@ -2945,6 +3053,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Search Status Retrieve
   /api/v1/flights/service-fee/:
     get:
       operationId: flights_service_fee_retrieve
@@ -2961,6 +3070,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Service Fee Retrieve
   /api/v1/flights/transactions/:
     get:
       operationId: flights_transactions_list
@@ -3005,6 +3115,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedFlightTransactionList'
           description: ''
+      summary: Flights Transactions List
   /api/v1/flights/webhooks/duffel/:
     post:
       operationId: flights_webhooks_duffel_create
@@ -3032,6 +3143,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Flights Webhooks Duffel Create
   /api/v1/gift-codes/logs/:
     get:
       operationId: gift_codes_logs_list
@@ -3091,6 +3203,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedGiftCodeRedemptionLogList'
           description: ''
+      summary: Gift Codes Logs List
   /api/v1/gift-codes/logs/{id}/:
     get:
       operationId: gift_codes_logs_retrieve
@@ -3115,6 +3228,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/GiftCodeRedemptionLog'
           description: ''
+      summary: Gift Codes Logs Retrieve
   /api/v1/gift-codes/my-redemptions/:
     get:
       operationId: gift_codes_my_redemptions_retrieve
@@ -3127,6 +3241,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Gift Codes My Redemptions Retrieve
   /api/v1/gift-codes/redeem/:
     post:
       operationId: gift_codes_redeem_create
@@ -3150,6 +3265,7 @@ paths:
       responses:
         '201':
           description: No response body
+      summary: Gift Codes Redeem Create
   /api/v1/notifications/:
     get:
       operationId: notifications_list
@@ -3245,6 +3361,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedNotificationLogList'
           description: ''
+      summary: Notifications List
     post:
       operationId: notifications_create
       description: 'ViewSet for viewing notification logs and sending notifications.
@@ -3285,6 +3402,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotificationLog'
           description: ''
+      summary: Notifications Create
   /api/v1/notifications/{id}/:
     get:
       operationId: notifications_retrieve
@@ -3321,6 +3439,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotificationLog'
           description: ''
+      summary: Notifications Retrieve
     delete:
       operationId: notifications_destroy
       description: 'ViewSet for viewing notification logs and sending notifications.
@@ -3352,6 +3471,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Notifications Destroy
   /api/v1/notifications/{id}/mark_as_read/:
     post:
       operationId: notifications_mark_as_read_create
@@ -3393,6 +3513,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotificationLog'
           description: ''
+      summary: Notifications Mark As Read Create
   /api/v1/notifications/mark_all_as_read/:
     post:
       operationId: notifications_mark_all_as_read_create
@@ -3431,6 +3552,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotificationLog'
           description: ''
+      summary: Notifications Mark All As Read Create
   /api/v1/notifications/send_to_all/:
     post:
       operationId: notifications_send_to_all_create
@@ -3461,6 +3583,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotificationLog'
           description: ''
+      summary: Notifications Send To All Create
   /api/v1/notifications/statistics/:
     get:
       operationId: notifications_statistics_retrieve
@@ -3486,6 +3609,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotificationLog'
           description: ''
+      summary: Notifications Statistics Retrieve
   /api/v1/notifications/unread_count/:
     get:
       operationId: notifications_unread_count_retrieve
@@ -3513,6 +3637,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotificationLog'
           description: ''
+      summary: Notifications Unread Count Retrieve
   /api/v1/payments/wayl/admin/deposit-config/:
     get:
       operationId: payments_wayl_admin_deposit_config_retrieve
@@ -3530,6 +3655,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Payments Wayl Admin Deposit Config Retrieve
     put:
       operationId: payments_wayl_admin_deposit_config_update
       description: 'Admin: Get and update deposit configuration.
@@ -3546,6 +3672,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Payments Wayl Admin Deposit Config Update
   /api/v1/payments/wayl/admin/force-complete/:
     post:
       operationId: payments_wayl_admin_force_complete_create
@@ -3569,6 +3696,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Payments Wayl Admin Force Complete Create
   /api/v1/payments/wayl/admin/payments/:
     get:
       operationId: payments_wayl_admin_payments_retrieve
@@ -3584,6 +3712,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Payments Wayl Admin Payments Retrieve
   /api/v1/payments/wayl/admin/payments/stats/:
     get:
       operationId: payments_wayl_admin_payments_stats_retrieve
@@ -3603,6 +3732,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Payments Wayl Admin Payments Stats Retrieve
   /api/v1/payments/wayl/admin/refund/:
     post:
       operationId: payments_wayl_admin_refund_create
@@ -3618,6 +3748,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Payments Wayl Admin Refund Create
   /api/v1/payments/wayl/admin/refund-status/{refund_id}/:
     get:
       operationId: payments_wayl_admin_refund_status_retrieve
@@ -3639,6 +3770,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Payments Wayl Admin Refund Status Retrieve
   /api/v1/payments/wayl/admin/sync-status/:
     post:
       operationId: payments_wayl_admin_sync_status_create
@@ -3659,6 +3791,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Payments Wayl Admin Sync Status Create
   /api/v1/payments/wayl/create-link/:
     post:
       operationId: payments_wayl_create_link_create
@@ -3687,6 +3820,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Payments Wayl Create Link Create
   /api/v1/payments/wayl/deposit/:
     post:
       operationId: payments_wayl_deposit_create
@@ -3715,6 +3849,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Payments Wayl Deposit Create
   /api/v1/payments/wayl/deposit-config/:
     get:
       operationId: payments_wayl_deposit_config_retrieve
@@ -3730,6 +3865,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Payments Wayl Deposit Config Retrieve
   /api/v1/payments/wayl/flight/:
     post:
       operationId: payments_wayl_flight_create
@@ -3758,6 +3894,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Payments Wayl Flight Create
   /api/v1/payments/wayl/program/:
     post:
       operationId: payments_wayl_program_create
@@ -3772,6 +3909,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Payments Wayl Program Create
   /api/v1/payments/wayl/redirect/:
     get:
       operationId: payments_wayl_redirect_retrieve
@@ -3795,6 +3933,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Payments Wayl Redirect Retrieve
   /api/v1/payments/wayl/scholarship/:
     post:
       operationId: payments_wayl_scholarship_create
@@ -3809,6 +3948,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Payments Wayl Scholarship Create
   /api/v1/payments/wayl/status/{reference_id}/:
     get:
       operationId: payments_wayl_status_retrieve
@@ -3830,6 +3970,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Payments Wayl Status Retrieve
   /api/v1/payments/webhooks/wayl/:
     post:
       operationId: payments_webhooks_wayl_create
@@ -3859,6 +4000,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Payments Webhooks Wayl Create
   /api/v1/study-abroad/applications/:
     get:
       operationId: study_abroad_applications_list
@@ -3924,6 +4066,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedApplicationList'
           description: ''
+      summary: Study Abroad Applications List
     post:
       operationId: study_abroad_applications_create
       description: Create a new draft application.
@@ -3951,6 +4094,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApplicationCreate'
           description: ''
+      summary: Study Abroad Applications Create
   /api/v1/study-abroad/applications/{id}/:
     get:
       operationId: study_abroad_applications_retrieve
@@ -3997,6 +4141,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Application'
           description: ''
+      summary: Study Abroad Applications Retrieve
     put:
       operationId: study_abroad_applications_update
       description: Update draft application (only allowed for draft status).
@@ -4030,6 +4175,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Application'
           description: ''
+      summary: Study Abroad Applications Update
     patch:
       operationId: study_abroad_applications_partial_update
       description: 'ViewSet for managing program applications.
@@ -4086,6 +4232,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Application'
           description: ''
+      summary: Study Abroad Applications Partial Update
     delete:
       operationId: study_abroad_applications_destroy
       description: Delete draft application (only allowed for draft status).
@@ -4103,6 +4250,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Study Abroad Applications Destroy
   /api/v1/study-abroad/applications/{id}/approve/:
     post:
       operationId: study_abroad_applications_approve_create
@@ -4136,6 +4284,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Application'
           description: ''
+      summary: Study Abroad Applications Approve Create
   /api/v1/study-abroad/applications/{id}/complete_missing_documents/:
     post:
       operationId: study_abroad_applications_complete_missing_documents_create
@@ -4172,6 +4321,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Application'
           description: ''
+      summary: Study Abroad Applications Complete Missing Documents Create
   /api/v1/study-abroad/applications/{id}/delete_document/:
     delete:
       operationId: study_abroad_applications_delete_document_destroy
@@ -4192,6 +4342,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Study Abroad Applications Delete Document Destroy
   /api/v1/study-abroad/applications/{id}/documents/{document_id}/download/:
     get:
       operationId: study_abroad_applications_documents_download_retrieve
@@ -4227,6 +4378,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Application'
           description: ''
+      summary: Study Abroad Applications Documents Download Retrieve
   /api/v1/study-abroad/applications/{id}/download-all-documents/:
     get:
       operationId: study_abroad_applications_download_all_documents_retrieve
@@ -4258,6 +4410,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Application'
           description: ''
+      summary: Study Abroad Applications Download All Documents Retrieve
   /api/v1/study-abroad/applications/{id}/history/:
     get:
       operationId: study_abroad_applications_history_retrieve
@@ -4284,6 +4437,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Application'
           description: ''
+      summary: Study Abroad Applications History Retrieve
   /api/v1/study-abroad/applications/{id}/mark_missing_documents/:
     post:
       operationId: study_abroad_applications_mark_missing_documents_create
@@ -4322,6 +4476,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Application'
           description: ''
+      summary: Study Abroad Applications Mark Missing Documents Create
   /api/v1/study-abroad/applications/{id}/process_payment/:
     post:
       operationId: study_abroad_applications_process_payment_create
@@ -4362,6 +4517,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Application'
           description: ''
+      summary: Study Abroad Applications Process Payment Create
   /api/v1/study-abroad/applications/{id}/reject/:
     post:
       operationId: study_abroad_applications_reject_create
@@ -4405,6 +4561,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Application'
           description: ''
+      summary: Study Abroad Applications Reject Create
   /api/v1/study-abroad/applications/{id}/submit/:
     post:
       operationId: study_abroad_applications_submit_create
@@ -4443,6 +4600,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApplicationSubmit'
           description: ''
+      summary: Study Abroad Applications Submit Create
   /api/v1/study-abroad/applications/{id}/upload_document/:
     post:
       operationId: study_abroad_applications_upload_document_create
@@ -4487,6 +4645,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApplicationDocument'
           description: ''
+      summary: Study Abroad Applications Upload Document Create
   /api/v1/study-abroad/applications/all_applications/:
     get:
       operationId: study_abroad_applications_all_applications_retrieve
@@ -4512,6 +4671,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Application'
           description: ''
+      summary: Study Abroad Applications All Applications Retrieve
   /api/v1/study-abroad/applications/check_eligibility/:
     get:
       operationId: study_abroad_applications_check_eligibility_retrieve
@@ -4530,6 +4690,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Application'
           description: ''
+      summary: Study Abroad Applications Check Eligibility Retrieve
   /api/v1/study-abroad/auth/login/:
     post:
       operationId: study_abroad_auth_login_create
@@ -4551,6 +4712,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Study Abroad Auth Login Create
   /api/v1/study-abroad/auth/logout/:
     post:
       operationId: study_abroad_auth_logout_create
@@ -4568,6 +4730,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Study Abroad Auth Logout Create
   /api/v1/study-abroad/auth/me/:
     get:
       operationId: study_abroad_auth_me_retrieve
@@ -4580,6 +4743,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Study Abroad Auth Me Retrieve
   /api/v1/study-abroad/auth/mobile/login/:
     post:
       operationId: study_abroad_auth_mobile_login_create
@@ -4598,6 +4762,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Study Abroad Auth Mobile Login Create
   /api/v1/study-abroad/auth/mobile/register/:
     post:
       operationId: study_abroad_auth_mobile_register_create
@@ -4616,6 +4781,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Study Abroad Auth Mobile Register Create
   /api/v1/study-abroad/auth/refresh/:
     post:
       operationId: study_abroad_auth_refresh_create
@@ -4643,6 +4809,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TokenRefresh'
           description: ''
+      summary: Study Abroad Auth Refresh Create
   /api/v1/study-abroad/colleges/:
     get:
       operationId: study_abroad_colleges_list
@@ -4688,6 +4855,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedCollegeList'
           description: ''
+      summary: Study Abroad Colleges List
     post:
       operationId: study_abroad_colleges_create
       description: ViewSet for managing colleges.
@@ -4715,6 +4883,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/College'
           description: ''
+      summary: Study Abroad Colleges Create
   /api/v1/study-abroad/colleges-public/:
     get:
       operationId: study_abroad_colleges_public_list
@@ -4761,6 +4930,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedCollegeList'
           description: ''
+      summary: Study Abroad Colleges Public List
   /api/v1/study-abroad/colleges-public/{id}/:
     get:
       operationId: study_abroad_colleges_public_retrieve
@@ -4784,6 +4954,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/College'
           description: ''
+      summary: Study Abroad Colleges Public Retrieve
   /api/v1/study-abroad/colleges/{id}/:
     get:
       operationId: study_abroad_colleges_retrieve
@@ -4807,6 +4978,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/College'
           description: ''
+      summary: Study Abroad Colleges Retrieve
     put:
       operationId: study_abroad_colleges_update
       description: ViewSet for managing colleges.
@@ -4841,6 +5013,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/College'
           description: ''
+      summary: Study Abroad Colleges Update
     patch:
       operationId: study_abroad_colleges_partial_update
       description: ViewSet for managing colleges.
@@ -4874,6 +5047,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/College'
           description: ''
+      summary: Study Abroad Colleges Partial Update
     delete:
       operationId: study_abroad_colleges_destroy
       description: ViewSet for managing colleges.
@@ -4892,6 +5066,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Study Abroad Colleges Destroy
   /api/v1/study-abroad/countries/:
     get:
       operationId: study_abroad_countries_list
@@ -4938,6 +5113,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedCountryList'
           description: ''
+      summary: Study Abroad Countries List
     post:
       operationId: study_abroad_countries_create
       description: 'Country Management
@@ -4970,6 +5146,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Country'
           description: ''
+      summary: Study Abroad Countries Create
   /api/v1/study-abroad/countries-public/:
     get:
       operationId: study_abroad_countries_public_list
@@ -5012,6 +5189,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedCountryList'
           description: ''
+      summary: Study Abroad Countries Public List
   /api/v1/study-abroad/countries-public/{id}/:
     get:
       operationId: study_abroad_countries_public_retrieve
@@ -5036,6 +5214,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Country'
           description: ''
+      summary: Study Abroad Countries Public Retrieve
   /api/v1/study-abroad/countries/{id}/:
     get:
       operationId: study_abroad_countries_retrieve
@@ -5064,6 +5243,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Country'
           description: ''
+      summary: Study Abroad Countries Retrieve
     put:
       operationId: study_abroad_countries_update
       description: 'Country Management
@@ -5103,6 +5283,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Country'
           description: ''
+      summary: Study Abroad Countries Update
     patch:
       operationId: study_abroad_countries_partial_update
       description: 'Country Management
@@ -5141,6 +5322,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Country'
           description: ''
+      summary: Study Abroad Countries Partial Update
     delete:
       operationId: study_abroad_countries_destroy
       description: 'Country Management
@@ -5164,6 +5346,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Study Abroad Countries Destroy
   /api/v1/study-abroad/departments/:
     get:
       operationId: study_abroad_departments_list
@@ -5209,6 +5392,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedDepartmentList'
           description: ''
+      summary: Study Abroad Departments List
     post:
       operationId: study_abroad_departments_create
       description: ViewSet for managing departments.
@@ -5236,6 +5420,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Department'
           description: ''
+      summary: Study Abroad Departments Create
   /api/v1/study-abroad/departments/{id}/:
     get:
       operationId: study_abroad_departments_retrieve
@@ -5259,6 +5444,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Department'
           description: ''
+      summary: Study Abroad Departments Retrieve
     put:
       operationId: study_abroad_departments_update
       description: ViewSet for managing departments.
@@ -5293,6 +5479,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Department'
           description: ''
+      summary: Study Abroad Departments Update
     patch:
       operationId: study_abroad_departments_partial_update
       description: ViewSet for managing departments.
@@ -5326,6 +5513,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Department'
           description: ''
+      summary: Study Abroad Departments Partial Update
     delete:
       operationId: study_abroad_departments_destroy
       description: ViewSet for managing departments.
@@ -5344,6 +5532,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Study Abroad Departments Destroy
   /api/v1/study-abroad/durations/:
     get:
       operationId: study_abroad_durations_list
@@ -5385,6 +5574,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedDurationList'
           description: ''
+      summary: Study Abroad Durations List
     post:
       operationId: study_abroad_durations_create
       description: ViewSet for managing durations.
@@ -5412,6 +5602,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Duration'
           description: ''
+      summary: Study Abroad Durations Create
   /api/v1/study-abroad/durations/{id}/:
     get:
       operationId: study_abroad_durations_retrieve
@@ -5435,6 +5626,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Duration'
           description: ''
+      summary: Study Abroad Durations Retrieve
     put:
       operationId: study_abroad_durations_update
       description: ViewSet for managing durations.
@@ -5469,6 +5661,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Duration'
           description: ''
+      summary: Study Abroad Durations Update
     patch:
       operationId: study_abroad_durations_partial_update
       description: ViewSet for managing durations.
@@ -5502,6 +5695,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Duration'
           description: ''
+      summary: Study Abroad Durations Partial Update
     delete:
       operationId: study_abroad_durations_destroy
       description: ViewSet for managing durations.
@@ -5520,6 +5714,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Study Abroad Durations Destroy
   /api/v1/study-abroad/languages/:
     get:
       operationId: study_abroad_languages_list
@@ -5561,6 +5756,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedLanguageList'
           description: ''
+      summary: Study Abroad Languages List
     post:
       operationId: study_abroad_languages_create
       description: ViewSet for managing languages.
@@ -5588,6 +5784,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Language'
           description: ''
+      summary: Study Abroad Languages Create
   /api/v1/study-abroad/languages/{id}/:
     get:
       operationId: study_abroad_languages_retrieve
@@ -5611,6 +5808,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Language'
           description: ''
+      summary: Study Abroad Languages Retrieve
     put:
       operationId: study_abroad_languages_update
       description: ViewSet for managing languages.
@@ -5645,6 +5843,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Language'
           description: ''
+      summary: Study Abroad Languages Update
     patch:
       operationId: study_abroad_languages_partial_update
       description: ViewSet for managing languages.
@@ -5678,6 +5877,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Language'
           description: ''
+      summary: Study Abroad Languages Partial Update
     delete:
       operationId: study_abroad_languages_destroy
       description: ViewSet for managing languages.
@@ -5696,6 +5896,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Study Abroad Languages Destroy
   /api/v1/study-abroad/manager/applications/:
     get:
       operationId: study_abroad_manager_applications_list
@@ -5739,6 +5940,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedApplicationList'
           description: ''
+      summary: Study Abroad Manager Applications List
   /api/v1/study-abroad/manager/applications/{id}/:
     get:
       operationId: study_abroad_manager_applications_retrieve
@@ -5761,6 +5963,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Application'
           description: ''
+      summary: Study Abroad Manager Applications Retrieve
   /api/v1/study-abroad/manager/applications/{id}/approve/:
     post:
       operationId: study_abroad_manager_applications_approve_create
@@ -5781,6 +5984,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Study Abroad Manager Applications Approve Create
   /api/v1/study-abroad/manager/applications/{id}/mark_missing_documents/:
     post:
       operationId: study_abroad_manager_applications_mark_missing_documents_create
@@ -5801,6 +6005,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Study Abroad Manager Applications Mark Missing Documents Create
   /api/v1/study-abroad/manager/applications/{id}/update_status/:
     post:
       operationId: study_abroad_manager_applications_update_status_create
@@ -5823,6 +6028,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Study Abroad Manager Applications Update Status Create
   /api/v1/study-abroad/manager/applications/counts/:
     get:
       operationId: study_abroad_manager_applications_counts_retrieve
@@ -5835,6 +6041,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Study Abroad Manager Applications Counts Retrieve
   /api/v1/study-abroad/manager/scholarship-applications/:
     get:
       operationId: study_abroad_manager_scholarship_applications_list
@@ -5878,6 +6085,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedScholarshipApplicationListList'
           description: ''
+      summary: Study Abroad Manager Scholarship Applications List
   /api/v1/study-abroad/manager/scholarship-applications/{id}/:
     get:
       operationId: study_abroad_manager_scholarship_applications_retrieve
@@ -5900,6 +6108,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipApplicationDetail'
           description: ''
+      summary: Study Abroad Manager Scholarship Applications Retrieve
   /api/v1/study-abroad/manager/scholarship-applications/{id}/approve/:
     post:
       operationId: study_abroad_manager_scholarship_applications_approve_create
@@ -5920,6 +6129,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Study Abroad Manager Scholarship Applications Approve Create
   /api/v1/study-abroad/manager/scholarship-applications/{id}/mark_missing_documents/:
     post:
       operationId: study_abroad_manager_scholarship_applications_mark_missing_documents_create
@@ -5942,6 +6152,8 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Study Abroad Manager Scholarship Applications Mark Missing Documents
+        Create
   /api/v1/study-abroad/manager/scholarship-applications/{id}/update_status/:
     post:
       operationId: study_abroad_manager_scholarship_applications_update_status_create
@@ -5964,6 +6176,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Study Abroad Manager Scholarship Applications Update Status Create
   /api/v1/study-abroad/manager/scholarship-applications/counts/:
     get:
       operationId: study_abroad_manager_scholarship_applications_counts_retrieve
@@ -5976,6 +6189,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Study Abroad Manager Scholarship Applications Counts Retrieve
   /api/v1/study-abroad/my-gift-redemptions/:
     get:
       operationId: study_abroad_my_gift_redemptions_list
@@ -6019,6 +6233,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedUserGiftCodeRedemptionList'
           description: ''
+      summary: Study Abroad My Gift Redemptions List
   /api/v1/study-abroad/my-gift-redemptions/{id}/:
     get:
       operationId: study_abroad_my_gift_redemptions_retrieve
@@ -6043,6 +6258,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserGiftCodeRedemption'
           description: ''
+      summary: Study Abroad My Gift Redemptions Retrieve
   /api/v1/study-abroad/my-gift-redemptions/recent/:
     get:
       operationId: study_abroad_my_gift_redemptions_recent_retrieve
@@ -6059,6 +6275,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserGiftCodeRedemption'
           description: ''
+      summary: Study Abroad My Gift Redemptions Recent Retrieve
   /api/v1/study-abroad/my-transactions/:
     get:
       operationId: study_abroad_my_transactions_list
@@ -6104,6 +6321,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedUserTransactionList'
           description: ''
+      summary: Study Abroad My Transactions List
   /api/v1/study-abroad/my-transactions/{id}/:
     get:
       operationId: study_abroad_my_transactions_retrieve
@@ -6130,6 +6348,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserTransaction'
           description: ''
+      summary: Study Abroad My Transactions Retrieve
   /api/v1/study-abroad/my-transactions/all_transactions/:
     get:
       operationId: study_abroad_my_transactions_all_transactions_retrieve
@@ -6149,6 +6368,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserTransaction'
           description: ''
+      summary: Study Abroad My Transactions All Transactions Retrieve
   /api/v1/study-abroad/my-transactions/recent/:
     get:
       operationId: study_abroad_my_transactions_recent_retrieve
@@ -6167,6 +6387,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserTransaction'
           description: ''
+      summary: Study Abroad My Transactions Recent Retrieve
   /api/v1/study-abroad/program-types/:
     get:
       operationId: study_abroad_program_types_list
@@ -6208,6 +6429,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedProgramTypeList'
           description: ''
+      summary: Study Abroad Program Types List
     post:
       operationId: study_abroad_program_types_create
       description: ViewSet for managing program types.
@@ -6235,6 +6457,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProgramType'
           description: ''
+      summary: Study Abroad Program Types Create
   /api/v1/study-abroad/program-types/{id}/:
     get:
       operationId: study_abroad_program_types_retrieve
@@ -6258,6 +6481,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProgramType'
           description: ''
+      summary: Study Abroad Program Types Retrieve
     put:
       operationId: study_abroad_program_types_update
       description: ViewSet for managing program types.
@@ -6292,6 +6516,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProgramType'
           description: ''
+      summary: Study Abroad Program Types Update
     patch:
       operationId: study_abroad_program_types_partial_update
       description: ViewSet for managing program types.
@@ -6325,6 +6550,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProgramType'
           description: ''
+      summary: Study Abroad Program Types Partial Update
     delete:
       operationId: study_abroad_program_types_destroy
       description: ViewSet for managing program types.
@@ -6343,6 +6569,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Study Abroad Program Types Destroy
   /api/v1/study-abroad/programs/:
     get:
       operationId: study_abroad_programs_list
@@ -6404,6 +6631,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedProgramList'
           description: ''
+      summary: Study Abroad Programs List
     post:
       operationId: study_abroad_programs_create
       description: ViewSet for managing programs (admin only).
@@ -6431,6 +6659,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Program'
           description: ''
+      summary: Study Abroad Programs Create
   /api/v1/study-abroad/programs-public/:
     get:
       operationId: study_abroad_programs_public_list
@@ -6493,6 +6722,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedProgramPublicList'
           description: ''
+      summary: Study Abroad Programs Public List
   /api/v1/study-abroad/programs-public/{id}/:
     get:
       operationId: study_abroad_programs_public_retrieve
@@ -6516,6 +6746,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProgramPublic'
           description: ''
+      summary: Study Abroad Programs Public Retrieve
   /api/v1/study-abroad/programs/{id}/:
     get:
       operationId: study_abroad_programs_retrieve
@@ -6539,6 +6770,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Program'
           description: ''
+      summary: Study Abroad Programs Retrieve
     put:
       operationId: study_abroad_programs_update
       description: ViewSet for managing programs (admin only).
@@ -6573,6 +6805,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Program'
           description: ''
+      summary: Study Abroad Programs Update
     patch:
       operationId: study_abroad_programs_partial_update
       description: ViewSet for managing programs (admin only).
@@ -6606,6 +6839,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Program'
           description: ''
+      summary: Study Abroad Programs Partial Update
     delete:
       operationId: study_abroad_programs_destroy
       description: ViewSet for managing programs (admin only).
@@ -6624,6 +6858,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Study Abroad Programs Destroy
   /api/v1/study-abroad/scholarship-applications/:
     get:
       operationId: study_abroad_scholarship_applications_list
@@ -6699,6 +6934,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedScholarshipApplicationListList'
           description: ''
+      summary: Study Abroad Scholarship Applications List
     post:
       operationId: study_abroad_scholarship_applications_create
       description: 'ViewSet for managing scholarship applications.
@@ -6730,6 +6966,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipApplication'
           description: ''
+      summary: Study Abroad Scholarship Applications Create
   /api/v1/study-abroad/scholarship-applications/{id}/:
     get:
       operationId: study_abroad_scholarship_applications_retrieve
@@ -6757,6 +6994,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipApplicationDetail'
           description: ''
+      summary: Study Abroad Scholarship Applications Retrieve
     put:
       operationId: study_abroad_scholarship_applications_update
       description: 'ViewSet for managing scholarship applications.
@@ -6795,6 +7033,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipApplication'
           description: ''
+      summary: Study Abroad Scholarship Applications Update
     patch:
       operationId: study_abroad_scholarship_applications_partial_update
       description: 'ViewSet for managing scholarship applications.
@@ -6832,6 +7071,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipApplication'
           description: ''
+      summary: Study Abroad Scholarship Applications Partial Update
     delete:
       operationId: study_abroad_scholarship_applications_destroy
       description: 'ViewSet for managing scholarship applications.
@@ -6854,6 +7094,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Study Abroad Scholarship Applications Destroy
   /api/v1/study-abroad/scholarship-applications/{id}/approve/:
     post:
       operationId: study_abroad_scholarship_applications_approve_create
@@ -6888,6 +7129,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipApplication'
           description: ''
+      summary: Study Abroad Scholarship Applications Approve Create
   /api/v1/study-abroad/scholarship-applications/{id}/complete_missing_documents/:
     post:
       operationId: study_abroad_scholarship_applications_complete_missing_documents_create
@@ -6925,6 +7167,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipApplication'
           description: ''
+      summary: Study Abroad Scholarship Applications Complete Missing Documents Create
   /api/v1/study-abroad/scholarship-applications/{id}/delete_document/:
     delete:
       operationId: study_abroad_scholarship_applications_delete_document_destroy
@@ -6946,6 +7189,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Study Abroad Scholarship Applications Delete Document Destroy
   /api/v1/study-abroad/scholarship-applications/{id}/download_document/:
     get:
       operationId: study_abroad_scholarship_applications_download_document_retrieve
@@ -6973,6 +7217,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipApplication'
           description: ''
+      summary: Study Abroad Scholarship Applications Download Document Retrieve
   /api/v1/study-abroad/scholarship-applications/{id}/download_documents/:
     get:
       operationId: study_abroad_scholarship_applications_download_documents_retrieve
@@ -7000,6 +7245,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipApplication'
           description: ''
+      summary: Study Abroad Scholarship Applications Download Documents Retrieve
   /api/v1/study-abroad/scholarship-applications/{id}/history/:
     get:
       operationId: study_abroad_scholarship_applications_history_retrieve
@@ -7027,6 +7273,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipApplication'
           description: ''
+      summary: Study Abroad Scholarship Applications History Retrieve
   /api/v1/study-abroad/scholarship-applications/{id}/mark_missing_documents/:
     post:
       operationId: study_abroad_scholarship_applications_mark_missing_documents_create
@@ -7067,6 +7314,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipApplication'
           description: ''
+      summary: Study Abroad Scholarship Applications Mark Missing Documents Create
   /api/v1/study-abroad/scholarship-applications/{id}/process_payment/:
     post:
       operationId: study_abroad_scholarship_applications_process_payment_create
@@ -7108,6 +7356,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipApplication'
           description: ''
+      summary: Study Abroad Scholarship Applications Process Payment Create
   /api/v1/study-abroad/scholarship-applications/{id}/reject/:
     post:
       operationId: study_abroad_scholarship_applications_reject_create
@@ -7149,6 +7398,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipApplication'
           description: ''
+      summary: Study Abroad Scholarship Applications Reject Create
   /api/v1/study-abroad/scholarship-applications/{id}/submit/:
     post:
       operationId: study_abroad_scholarship_applications_submit_create
@@ -7188,6 +7438,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipApplication'
           description: ''
+      summary: Study Abroad Scholarship Applications Submit Create
   /api/v1/study-abroad/scholarship-applications/{id}/update_status/:
     post:
       operationId: study_abroad_scholarship_applications_update_status_create
@@ -7225,6 +7476,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipApplication'
           description: ''
+      summary: Study Abroad Scholarship Applications Update Status Create
   /api/v1/study-abroad/scholarship-applications/{id}/upload_acceptance/:
     post:
       operationId: study_abroad_scholarship_applications_upload_acceptance_create
@@ -7256,6 +7508,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipApplication'
           description: ''
+      summary: Study Abroad Scholarship Applications Upload Acceptance Create
   /api/v1/study-abroad/scholarship-applications/{id}/upload_document/:
     post:
       operationId: study_abroad_scholarship_applications_upload_document_create
@@ -7298,6 +7551,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipApplication'
           description: ''
+      summary: Study Abroad Scholarship Applications Upload Document Create
   /api/v1/study-abroad/scholarship-applications/check_eligibility/:
     get:
       operationId: study_abroad_scholarship_applications_check_eligibility_retrieve
@@ -7316,6 +7570,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipApplication'
           description: ''
+      summary: Study Abroad Scholarship Applications Check Eligibility Retrieve
   /api/v1/study-abroad/scholarship-stats/:
     get:
       operationId: study_abroad_scholarship_stats_retrieve
@@ -7332,6 +7587,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Study Abroad Scholarship Stats Retrieve
   /api/v1/study-abroad/scholarship-types/:
     get:
       operationId: study_abroad_scholarship_types_list
@@ -7373,6 +7629,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedScholarshipTypeList'
           description: ''
+      summary: Study Abroad Scholarship Types List
     post:
       operationId: study_abroad_scholarship_types_create
       description: ViewSet for managing scholarship types (admin only).
@@ -7400,6 +7657,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipType'
           description: ''
+      summary: Study Abroad Scholarship Types Create
   /api/v1/study-abroad/scholarship-types-public/:
     get:
       operationId: study_abroad_scholarship_types_public_list
@@ -7442,6 +7700,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedScholarshipTypeList'
           description: ''
+      summary: Study Abroad Scholarship Types Public List
   /api/v1/study-abroad/scholarship-types/{id}/:
     get:
       operationId: study_abroad_scholarship_types_retrieve
@@ -7465,6 +7724,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipType'
           description: ''
+      summary: Study Abroad Scholarship Types Retrieve
     put:
       operationId: study_abroad_scholarship_types_update
       description: ViewSet for managing scholarship types (admin only).
@@ -7499,6 +7759,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipType'
           description: ''
+      summary: Study Abroad Scholarship Types Update
     patch:
       operationId: study_abroad_scholarship_types_partial_update
       description: ViewSet for managing scholarship types (admin only).
@@ -7532,6 +7793,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScholarshipType'
           description: ''
+      summary: Study Abroad Scholarship Types Partial Update
     delete:
       operationId: study_abroad_scholarship_types_destroy
       description: ViewSet for managing scholarship types (admin only).
@@ -7550,6 +7812,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Study Abroad Scholarship Types Destroy
   /api/v1/study-abroad/scholarships/:
     get:
       operationId: study_abroad_scholarships_list
@@ -7627,6 +7890,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedScholarshipListList'
           description: ''
+      summary: Study Abroad Scholarships List
     post:
       operationId: study_abroad_scholarships_create
       description: 'ViewSet for managing scholarships.
@@ -7658,6 +7922,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Scholarship'
           description: ''
+      summary: Study Abroad Scholarships Create
   /api/v1/study-abroad/scholarships-public/:
     get:
       operationId: study_abroad_scholarships_public_list
@@ -7728,6 +7993,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedScholarshipListList'
           description: ''
+      summary: Study Abroad Scholarships Public List
   /api/v1/study-abroad/scholarships-public/{id}/:
     get:
       operationId: study_abroad_scholarships_public_retrieve
@@ -7751,6 +8017,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Scholarship'
           description: ''
+      summary: Study Abroad Scholarships Public Retrieve
   /api/v1/study-abroad/scholarships/{id}/:
     get:
       operationId: study_abroad_scholarships_retrieve
@@ -7778,6 +8045,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Scholarship'
           description: ''
+      summary: Study Abroad Scholarships Retrieve
     put:
       operationId: study_abroad_scholarships_update
       description: 'ViewSet for managing scholarships.
@@ -7816,6 +8084,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Scholarship'
           description: ''
+      summary: Study Abroad Scholarships Update
     patch:
       operationId: study_abroad_scholarships_partial_update
       description: 'ViewSet for managing scholarships.
@@ -7853,6 +8122,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Scholarship'
           description: ''
+      summary: Study Abroad Scholarships Partial Update
     delete:
       operationId: study_abroad_scholarships_destroy
       description: 'ViewSet for managing scholarships.
@@ -7875,6 +8145,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Study Abroad Scholarships Destroy
   /api/v1/study-abroad/scholarships/{id}/toggle_active/:
     post:
       operationId: study_abroad_scholarships_toggle_active_create
@@ -7910,6 +8181,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Scholarship'
           description: ''
+      summary: Study Abroad Scholarships Toggle Active Create
   /api/v1/study-abroad/statistics/:
     get:
       operationId: study_abroad_statistics_retrieve
@@ -7926,6 +8198,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Study Abroad Statistics Retrieve
   /api/v1/study-abroad/transactions/:
     get:
       operationId: study_abroad_transactions_list
@@ -8032,6 +8305,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedTransactionList'
           description: ''
+      summary: Study Abroad Transactions List
   /api/v1/study-abroad/transactions/{id}/:
     get:
       operationId: study_abroad_transactions_retrieve
@@ -8057,6 +8331,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Transaction'
           description: ''
+      summary: Study Abroad Transactions Retrieve
   /api/v1/study-abroad/transactions/all_user_transactions/:
     get:
       operationId: study_abroad_transactions_all_user_transactions_retrieve
@@ -8075,6 +8350,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Transaction'
           description: ''
+      summary: Study Abroad Transactions All User Transactions Retrieve
   /api/v1/study-abroad/universities/:
     get:
       operationId: study_abroad_universities_list
@@ -8129,6 +8405,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedUniversityList'
           description: ''
+      summary: Study Abroad Universities List
     post:
       operationId: study_abroad_universities_create
       description: 'University Management
@@ -8161,6 +8438,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/University'
           description: ''
+      summary: Study Abroad Universities Create
   /api/v1/study-abroad/universities-public/:
     get:
       operationId: study_abroad_universities_public_list
@@ -8211,6 +8489,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedUniversityList'
           description: ''
+      summary: Study Abroad Universities Public List
   /api/v1/study-abroad/universities-public/{id}/:
     get:
       operationId: study_abroad_universities_public_retrieve
@@ -8235,6 +8514,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/University'
           description: ''
+      summary: Study Abroad Universities Public Retrieve
   /api/v1/study-abroad/universities/{id}/:
     get:
       operationId: study_abroad_universities_retrieve
@@ -8263,6 +8543,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/University'
           description: ''
+      summary: Study Abroad Universities Retrieve
     put:
       operationId: study_abroad_universities_update
       description: 'University Management
@@ -8302,6 +8583,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/University'
           description: ''
+      summary: Study Abroad Universities Update
     patch:
       operationId: study_abroad_universities_partial_update
       description: 'University Management
@@ -8340,6 +8622,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/University'
           description: ''
+      summary: Study Abroad Universities Partial Update
     delete:
       operationId: study_abroad_universities_destroy
       description: 'University Management
@@ -8363,6 +8646,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Study Abroad Universities Destroy
   /api/v1/translations/delivery-cities/:
     get:
       operationId: translations_delivery_cities_list
@@ -8408,6 +8692,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedDeliveryCityList'
           description: ''
+      summary: Translations Delivery Cities List
     post:
       operationId: translations_delivery_cities_create
       description: 'ViewSet for managing delivery cities and their pricing.
@@ -8458,6 +8743,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeliveryCity'
           description: ''
+      summary: Translations Delivery Cities Create
   /api/v1/translations/delivery-cities/{id}/:
     get:
       operationId: translations_delivery_cities_retrieve
@@ -8504,6 +8790,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeliveryCity'
           description: ''
+      summary: Translations Delivery Cities Retrieve
     put:
       operationId: translations_delivery_cities_update
       description: 'ViewSet for managing delivery cities and their pricing.
@@ -8561,6 +8848,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeliveryCity'
           description: ''
+      summary: Translations Delivery Cities Update
     patch:
       operationId: translations_delivery_cities_partial_update
       description: 'ViewSet for managing delivery cities and their pricing.
@@ -8617,6 +8905,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeliveryCity'
           description: ''
+      summary: Translations Delivery Cities Partial Update
     delete:
       operationId: translations_delivery_cities_destroy
       description: 'ViewSet for managing delivery cities and their pricing.
@@ -8658,6 +8947,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Translations Delivery Cities Destroy
   /api/v1/translations/delivery-cities/{id}/activate/:
     post:
       operationId: translations_delivery_cities_activate_create
@@ -8693,6 +8983,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeliveryCity'
           description: ''
+      summary: Translations Delivery Cities Activate Create
   /api/v1/translations/delivery-cities/{id}/deactivate/:
     post:
       operationId: translations_delivery_cities_deactivate_create
@@ -8728,6 +9019,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeliveryCity'
           description: ''
+      summary: Translations Delivery Cities Deactivate Create
   /api/v1/translations/delivery-cities/active_cities/:
     get:
       operationId: translations_delivery_cities_active_cities_retrieve
@@ -8746,6 +9038,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeliveryCity'
           description: ''
+      summary: Translations Delivery Cities Active Cities Retrieve
   /api/v1/translations/delivery-cities/statistics/:
     get:
       operationId: translations_delivery_cities_statistics_retrieve
@@ -8762,6 +9055,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeliveryCity'
           description: ''
+      summary: Translations Delivery Cities Statistics Retrieve
   /api/v1/translations/document-types/:
     get:
       operationId: translations_document_types_list
@@ -8807,6 +9101,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedDocumentTypeListList'
           description: ''
+      summary: Translations Document Types List
     post:
       operationId: translations_document_types_create
       description: 'Document Type Management (Admin Only)
@@ -8856,6 +9151,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocumentType'
           description: ''
+      summary: Translations Document Types Create
   /api/v1/translations/document-types/{id}/:
     get:
       operationId: translations_document_types_retrieve
@@ -8901,6 +9197,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocumentType'
           description: ''
+      summary: Translations Document Types Retrieve
     put:
       operationId: translations_document_types_update
       description: 'Document Type Management (Admin Only)
@@ -8957,6 +9254,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocumentType'
           description: ''
+      summary: Translations Document Types Update
     patch:
       operationId: translations_document_types_partial_update
       description: 'Document Type Management (Admin Only)
@@ -9012,6 +9310,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocumentType'
           description: ''
+      summary: Translations Document Types Partial Update
     delete:
       operationId: translations_document_types_destroy
       description: 'Document Type Management (Admin Only)
@@ -9052,6 +9351,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Translations Document Types Destroy
   /api/v1/translations/document-types/{id}/activate/:
     post:
       operationId: translations_document_types_activate_create
@@ -9087,6 +9387,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocumentType'
           description: ''
+      summary: Translations Document Types Activate Create
   /api/v1/translations/document-types/{id}/deactivate/:
     post:
       operationId: translations_document_types_deactivate_create
@@ -9122,6 +9423,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocumentType'
           description: ''
+      summary: Translations Document Types Deactivate Create
   /api/v1/translations/document-types/list_active/:
     get:
       operationId: translations_document_types_list_active_retrieve
@@ -9140,6 +9442,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocumentType'
           description: ''
+      summary: Translations Document Types List Active Retrieve
   /api/v1/translations/document-types/statistics/:
     get:
       operationId: translations_document_types_statistics_retrieve
@@ -9156,6 +9459,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocumentType'
           description: ''
+      summary: Translations Document Types Statistics Retrieve
   /api/v1/translations/language-pair-document-types/:
     get:
       operationId: translations_language_pair_document_types_list
@@ -9209,6 +9513,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedLanguagePairDocumentTypeList'
           description: ''
+      summary: Translations Language Pair Document Types List
     post:
       operationId: translations_language_pair_document_types_create
       description: 'Language Pair Document Type Management (Admin Only)
@@ -9257,6 +9562,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/LanguagePairDocumentType'
           description: ''
+      summary: Translations Language Pair Document Types Create
   /api/v1/translations/language-pair-document-types/{id}/:
     get:
       operationId: translations_language_pair_document_types_retrieve
@@ -9302,6 +9608,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/LanguagePairDocumentType'
           description: ''
+      summary: Translations Language Pair Document Types Retrieve
     put:
       operationId: translations_language_pair_document_types_update
       description: 'Language Pair Document Type Management (Admin Only)
@@ -9358,6 +9665,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/LanguagePairDocumentType'
           description: ''
+      summary: Translations Language Pair Document Types Update
     patch:
       operationId: translations_language_pair_document_types_partial_update
       description: 'Language Pair Document Type Management (Admin Only)
@@ -9413,6 +9721,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/LanguagePairDocumentType'
           description: ''
+      summary: Translations Language Pair Document Types Partial Update
     delete:
       operationId: translations_language_pair_document_types_destroy
       description: 'Language Pair Document Type Management (Admin Only)
@@ -9453,6 +9762,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Translations Language Pair Document Types Destroy
   /api/v1/translations/language-pair-document-types/{id}/activate/:
     post:
       operationId: translations_language_pair_document_types_activate_create
@@ -9489,6 +9799,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/LanguagePairDocumentType'
           description: ''
+      summary: Translations Language Pair Document Types Activate Create
   /api/v1/translations/language-pair-document-types/{id}/deactivate/:
     post:
       operationId: translations_language_pair_document_types_deactivate_create
@@ -9525,6 +9836,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/LanguagePairDocumentType'
           description: ''
+      summary: Translations Language Pair Document Types Deactivate Create
   /api/v1/translations/language-pair-document-types/by_language_pair/:
     get:
       operationId: translations_language_pair_document_types_by_language_pair_retrieve
@@ -9543,6 +9855,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/LanguagePairDocumentType'
           description: ''
+      summary: Translations Language Pair Document Types By Language Pair Retrieve
   /api/v1/translations/printing-settings/current/:
     get:
       operationId: translations_printing_settings_current_retrieve
@@ -9555,6 +9868,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Translations Printing Settings Current Retrieve
   /api/v1/translations/printing-settings/update_settings/:
     put:
       operationId: translations_printing_settings_update_settings_update
@@ -9567,6 +9881,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Translations Printing Settings Update Settings Update
     patch:
       operationId: translations_printing_settings_update_settings_partial_update
       description: Update printing settings.
@@ -9578,6 +9893,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Translations Printing Settings Update Settings Partial Update
   /api/v1/translations/translation-languages/:
     get:
       operationId: translations_translation_languages_list
@@ -9635,6 +9951,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedTranslationLanguageListList'
           description: ''
+      summary: Translations Translation Languages List
     post:
       operationId: translations_translation_languages_create
       description: 'Create new translation language pair.
@@ -9668,6 +9985,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TranslationLanguage'
           description: ''
+      summary: Translations Translation Languages Create
   /api/v1/translations/translation-languages/{id}/:
     get:
       operationId: translations_translation_languages_retrieve
@@ -9711,6 +10029,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TranslationLanguage'
           description: ''
+      summary: Translations Translation Languages Retrieve
     put:
       operationId: translations_translation_languages_update
       description: 'Update translation language pair.
@@ -9747,6 +10066,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TranslationLanguage'
           description: ''
+      summary: Translations Translation Languages Update
     patch:
       operationId: translations_translation_languages_partial_update
       description: 'Translation Language Management (Admin Only)
@@ -9800,6 +10120,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TranslationLanguage'
           description: ''
+      summary: Translations Translation Languages Partial Update
     delete:
       operationId: translations_translation_languages_destroy
       description: 'Delete translation language pair.
@@ -9820,6 +10141,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Translations Translation Languages Destroy
   /api/v1/translations/translation-languages/{id}/activate/:
     post:
       operationId: translations_translation_languages_activate_create
@@ -9857,6 +10179,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TranslationLanguage'
           description: ''
+      summary: Translations Translation Languages Activate Create
   /api/v1/translations/translation-languages/{id}/deactivate/:
     post:
       operationId: translations_translation_languages_deactivate_create
@@ -9894,6 +10217,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TranslationLanguage'
           description: ''
+      summary: Translations Translation Languages Deactivate Create
   /api/v1/translations/translation-languages/document_types_for_pair/:
     get:
       operationId: translations_translation_languages_document_types_for_pair_retrieve
@@ -9922,6 +10246,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TranslationLanguage'
           description: ''
+      summary: Translations Translation Languages Document Types For Pair Retrieve
   /api/v1/translations/translation-languages/language_reference/:
     get:
       operationId: translations_translation_languages_language_reference_retrieve
@@ -9941,6 +10266,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TranslationLanguage'
           description: ''
+      summary: Translations Translation Languages Language Reference Retrieve
   /api/v1/translations/translation-languages/source_languages/:
     get:
       operationId: translations_translation_languages_source_languages_retrieve
@@ -9959,6 +10285,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TranslationLanguage'
           description: ''
+      summary: Translations Translation Languages Source Languages Retrieve
   /api/v1/translations/translation-languages/statistics/:
     get:
       operationId: translations_translation_languages_statistics_retrieve
@@ -9977,6 +10304,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TranslationLanguage'
           description: ''
+      summary: Translations Translation Languages Statistics Retrieve
   /api/v1/translations/translation-languages/target_languages/:
     get:
       operationId: translations_translation_languages_target_languages_retrieve
@@ -9995,6 +10323,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TranslationLanguage'
           description: ''
+      summary: Translations Translation Languages Target Languages Retrieve
   /api/v1/translations/translation-requests/:
     get:
       operationId: translations_translation_requests_retrieve
@@ -10007,6 +10336,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Translations Translation Requests Retrieve
     post:
       operationId: translations_translation_requests_create
       description: 'ViewSet for managing translation requests/orders.
@@ -10032,6 +10362,7 @@ paths:
       responses:
         '201':
           description: No response body
+      summary: Translations Translation Requests Create
   /api/v1/translations/translation-requests/{id}/:
     get:
       operationId: translations_translation_requests_retrieve_2
@@ -10065,6 +10396,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Translations Translation Requests Retrieve 2
     put:
       operationId: translations_translation_requests_update
       description: 'ViewSet for managing translation requests/orders.
@@ -10097,6 +10429,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Translations Translation Requests Update
     patch:
       operationId: translations_translation_requests_partial_update
       description: 'ViewSet for managing translation requests/orders.
@@ -10129,6 +10462,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Translations Translation Requests Partial Update
     delete:
       operationId: translations_translation_requests_destroy
       description: 'ViewSet for managing translation requests/orders.
@@ -10161,6 +10495,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Translations Translation Requests Destroy
   /api/v1/translations/translation-requests/{id}/cancel_with_refund/:
     post:
       operationId: translations_translation_requests_cancel_with_refund_create
@@ -10200,6 +10535,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Translations Translation Requests Cancel With Refund Create
   /api/v1/translations/translation-requests/{id}/download_document/:
     get:
       operationId: translations_translation_requests_download_document_retrieve
@@ -10221,6 +10557,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Translations Translation Requests Download Document Retrieve
   /api/v1/translations/translation-requests/{id}/get_history/:
     get:
       operationId: translations_translation_requests_get_history_retrieve
@@ -10240,6 +10577,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Translations Translation Requests Get History Retrieve
   /api/v1/translations/translation-requests/{id}/process_payment/:
     post:
       operationId: translations_translation_requests_process_payment_create
@@ -10269,6 +10607,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Translations Translation Requests Process Payment Create
   /api/v1/translations/translation-requests/{id}/update_status/:
     post:
       operationId: translations_translation_requests_update_status_create
@@ -10316,6 +10655,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Translations Translation Requests Update Status Create
   /api/v1/translations/translation-requests/{id}/update_translation_status/:
     post:
       operationId: translations_translation_requests_update_translation_status_create
@@ -10348,6 +10688,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Translations Translation Requests Update Translation Status Create
   /api/v1/translations/translation-requests/{id}/upload_translated_document/:
     post:
       operationId: translations_translation_requests_upload_translated_document_create
@@ -10368,6 +10709,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Translations Translation Requests Upload Translated Document Create
   /api/v1/translations/translation-requests/admin_list/:
     get:
       operationId: translations_translation_requests_admin_list_retrieve
@@ -10382,6 +10724,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Translations Translation Requests Admin List Retrieve
   /api/v1/translations/translation-requests/create_request/:
     post:
       operationId: translations_translation_requests_create_request_create
@@ -10418,6 +10761,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Translations Translation Requests Create Request Create
   /api/v1/translations/translation-requests/estimate_pages/:
     post:
       operationId: translations_translation_requests_estimate_pages_create
@@ -10447,6 +10791,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Translations Translation Requests Estimate Pages Create
   /api/v1/translations/translation-requests/statistics/:
     get:
       operationId: translations_translation_requests_statistics_retrieve
@@ -10461,6 +10806,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Translations Translation Requests Statistics Retrieve
   /api/v1/users/2fa/backup-codes/:
     post:
       operationId: users_2fa_backup_codes_create
@@ -10474,6 +10820,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users 2Fa Backup Codes Create
   /api/v1/users/2fa/setup/:
     post:
       operationId: users_2fa_setup_create
@@ -10487,6 +10834,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users 2Fa Setup Create
   /api/v1/users/2fa/setup/verify/:
     post:
       operationId: users_2fa_setup_verify_create
@@ -10500,6 +10848,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users 2Fa Setup Verify Create
   /api/v1/users/2fa/verify/:
     post:
       operationId: users_2fa_verify_create
@@ -10513,6 +10862,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users 2Fa Verify Create
   /api/v1/users/apple-signin/:
     post:
       operationId: users_apple_signin_create
@@ -10526,6 +10876,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Apple Signin Create
   /api/v1/users/apple-signin/callback/:
     post:
       operationId: users_apple_signin_callback_create
@@ -10539,6 +10890,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Apple Signin Callback Create
   /api/v1/users/change-password/:
     post:
       operationId: users_change_password_create
@@ -10551,6 +10903,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Change Password Create
   /api/v1/users/complete-profile/:
     post:
       operationId: users_complete_profile_create
@@ -10565,6 +10918,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Complete Profile Create
   /api/v1/users/delete-account/:
     post:
       operationId: users_delete_account_create
@@ -10582,6 +10936,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Delete Account Create
   /api/v1/users/documents/:
     get:
       operationId: users_documents_list
@@ -10623,6 +10978,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedUserDocumentList'
           description: ''
+      summary: Users Documents List
   /api/v1/users/documents/{id}/:
     get:
       operationId: users_documents_retrieve
@@ -10645,6 +11001,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserDocument'
           description: ''
+      summary: Users Documents Retrieve
   /api/v1/users/fields-of-interest/:
     get:
       operationId: users_fields_of_interest_list
@@ -10687,6 +11044,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedFieldOfInterestList'
           description: ''
+      summary: Users Fields Of Interest List
   /api/v1/users/fields-of-interest/{id}/:
     get:
       operationId: users_fields_of_interest_retrieve
@@ -10711,6 +11069,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/FieldOfInterest'
           description: ''
+      summary: Users Fields Of Interest Retrieve
   /api/v1/users/forgot-password/:
     post:
       operationId: users_forgot_password_create
@@ -10726,6 +11085,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Forgot Password Create
   /api/v1/users/google-signin/:
     post:
       operationId: users_google_signin_create
@@ -10739,6 +11099,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Google Signin Create
   /api/v1/users/manage/:
     get:
       operationId: users_manage_list
@@ -10805,6 +11166,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginatedUserManagementList'
           description: ''
+      summary: Users Manage List
     post:
       operationId: users_manage_create
       description: ViewSet for admin users management.
@@ -10831,6 +11193,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserManagement'
           description: ''
+      summary: Users Manage Create
   /api/v1/users/manage/{id}/:
     get:
       operationId: users_manage_retrieve
@@ -10854,6 +11217,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserManagement'
           description: ''
+      summary: Users Manage Retrieve
     put:
       operationId: users_manage_update
       description: ViewSet for admin users management.
@@ -10887,6 +11251,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserManagement'
           description: ''
+      summary: Users Manage Update
     patch:
       operationId: users_manage_partial_update
       description: ViewSet for admin users management.
@@ -10920,6 +11285,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserManagement'
           description: ''
+      summary: Users Manage Partial Update
     delete:
       operationId: users_manage_destroy
       description: ViewSet for admin users management.
@@ -10938,6 +11304,7 @@ paths:
       responses:
         '204':
           description: No response body
+      summary: Users Manage Destroy
   /api/v1/users/manage/{id}/activate/:
     post:
       operationId: users_manage_activate_create
@@ -10972,6 +11339,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserManagement'
           description: ''
+      summary: Users Manage Activate Create
   /api/v1/users/manage/{id}/adjust-balance/:
     post:
       operationId: users_manage_adjust_balance_create
@@ -11011,6 +11379,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserManagement'
           description: ''
+      summary: Users Manage Adjust Balance Create
   /api/v1/users/manage/{id}/block-gift-card/:
     post:
       operationId: users_manage_block_gift_card_create
@@ -11045,6 +11414,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserManagement'
           description: ''
+      summary: Users Manage Block Gift Card Create
   /api/v1/users/manage/{id}/deactivate/:
     post:
       operationId: users_manage_deactivate_create
@@ -11079,6 +11449,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserManagement'
           description: ''
+      summary: Users Manage Deactivate Create
   /api/v1/users/manage/{id}/unblock-gift-card/:
     post:
       operationId: users_manage_unblock_gift_card_create
@@ -11113,6 +11484,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserManagement'
           description: ''
+      summary: Users Manage Unblock Gift Card Create
   /api/v1/users/me/:
     get:
       operationId: users_me_retrieve
@@ -11125,6 +11497,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Me Retrieve
   /api/v1/users/phone/forgot-password/:
     post:
       operationId: users_phone_forgot_password_create
@@ -11140,6 +11513,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Phone Forgot Password Create
   /api/v1/users/phone/login/:
     post:
       operationId: users_phone_login_create
@@ -11153,6 +11527,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Phone Login Create
   /api/v1/users/phone/register/:
     post:
       operationId: users_phone_register_create
@@ -11168,6 +11543,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Phone Register Create
   /api/v1/users/phone/resend-otp/:
     post:
       operationId: users_phone_resend_otp_create
@@ -11181,6 +11557,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Phone Resend Otp Create
   /api/v1/users/phone/resend-password-reset-otp/:
     post:
       operationId: users_phone_resend_password_reset_otp_create
@@ -11194,6 +11571,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Phone Resend Password Reset Otp Create
   /api/v1/users/phone/verify-otp/:
     post:
       operationId: users_phone_verify_otp_create
@@ -11207,6 +11585,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Phone Verify Otp Create
   /api/v1/users/phone/verify-password-reset/:
     post:
       operationId: users_phone_verify_password_reset_create
@@ -11220,6 +11599,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Phone Verify Password Reset Create
   /api/v1/users/redeem-gift-card/:
     post:
       operationId: users_redeem_gift_card_create
@@ -11245,6 +11625,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Redeem Gift Card Create
   /api/v1/users/register/:
     post:
       operationId: users_register_create
@@ -11260,6 +11641,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Register Create
   /api/v1/users/resend-otp/:
     post:
       operationId: users_resend_otp_create
@@ -11275,6 +11657,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Resend Otp Create
   /api/v1/users/resend-verification/:
     post:
       operationId: users_resend_verification_create
@@ -11290,6 +11673,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Resend Verification Create
   /api/v1/users/reset-password/:
     post:
       operationId: users_reset_password_create
@@ -11303,6 +11687,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Reset Password Create
   /api/v1/users/staff/:
     get:
       operationId: users_staff_retrieve
@@ -11315,6 +11700,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Staff Retrieve
     post:
       operationId: users_staff_create
       description: Create a new staff/manager user.
@@ -11326,6 +11712,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Staff Create
   /api/v1/users/staff/{id}/reset-2fa/:
     post:
       operationId: users_staff_reset_2fa_create
@@ -11344,6 +11731,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Staff Reset 2Fa Create
   /api/v1/users/staff/{id}/toggle-active/:
     post:
       operationId: users_staff_toggle_active_create
@@ -11362,6 +11750,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Staff Toggle Active Create
   /api/v1/users/update-profile/:
     post:
       operationId: users_update_profile_create
@@ -11381,6 +11770,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Update Profile Create
   /api/v1/users/verify-existing-user/:
     post:
       operationId: users_verify_existing_user_create
@@ -11394,6 +11784,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Verify Existing User Create
   /api/v1/users/verify-otp/:
     post:
       operationId: users_verify_otp_create
@@ -11409,6 +11800,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Verify Otp Create
   /api/v1/users/verify-password-reset/:
     post:
       operationId: users_verify_password_reset_create
@@ -11422,6 +11814,7 @@ paths:
       responses:
         '200':
           description: No response body
+      summary: Users Verify Password Reset Create
 components:
   schemas:
     Application:
