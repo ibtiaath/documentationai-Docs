@@ -756,7 +756,7 @@ paths:
       description: 'Get a single API request log detail.
 
 
-        GET /api/v1/analytics/api-logs/{id}/'
+        GET /api/v1/analytics/api-logs/:id/'
       parameters:
       - in: path
         name: id
@@ -858,7 +858,7 @@ paths:
       description: 'End a session (app close, logout).
 
 
-        POST /api/v1/analytics/sessions/{session_token}/end/'
+        POST /api/v1/analytics/sessions/:session_token/end/'
       parameters:
       - in: path
         name: session_token
@@ -1361,9 +1361,9 @@ paths:
       description: 'Admin: Get/update eSIM order detail.
 
 
-        GET   /api/v1/esim/admin/orders/{order_reference}/
+        GET   /api/v1/esim/admin/orders/:order_reference/
 
-        PATCH /api/v1/esim/admin/orders/{order_reference}/'
+        PATCH /api/v1/esim/admin/orders/:order_reference/'
       parameters:
       - in: path
         name: order_reference
@@ -1440,7 +1440,7 @@ paths:
       description: 'Get eSIM order detail (owner only).
 
 
-        GET /api/v1/esim/orders/{order_reference}/
+        GET /api/v1/esim/orders/:order_reference/
 
         Returns QR code, installation info, etc.'
       parameters:
@@ -1464,7 +1464,7 @@ paths:
       description: 'Get eSIM data usage (owner only).
 
 
-        GET /api/v1/esim/orders/{order_reference}/usage/
+        GET /api/v1/esim/orders/:order_reference/usage/
 
         Proxies Airalo usage API.'
       parameters:
@@ -1490,7 +1490,7 @@ paths:
 
         POST /api/v1/esim/orders/create/
 
-        Body: { "package_id": "...", "payment_method": "wallet" | "credit_card" }'
+        Body: `{ "package_id": "...", "payment_method": "wallet" | "credit_card" }`'
       tags:
       - esim
       security:
@@ -1522,7 +1522,7 @@ paths:
       description: 'List eSIM packages for a country.
 
 
-        GET /api/v1/esim/packages/?country={slug}
+        GET /api/v1/esim/packages/?country=:slug
 
         Only returns final_price_iqd — NEVER price_usd/commission.'
       tags:
@@ -1988,7 +1988,7 @@ paths:
       description: 'Get detailed booking information (admin only).
 
 
-        GET /api/v1/flights/admin/bookings/{booking_reference}/'
+        GET /api/v1/flights/admin/bookings/:booking_reference/'
       parameters:
       - in: path
         name: booking_reference
@@ -2010,7 +2010,7 @@ paths:
       description: 'Update booking status (admin only).
 
 
-        PATCH /api/v1/flights/admin/bookings/{booking_reference}/status/
+        PATCH /api/v1/flights/admin/bookings/:booking_reference/status/
 
 
         Full admin control - validates status transitions based on VALID_STATUS_TRANSITIONS.'
@@ -2115,11 +2115,11 @@ paths:
       description: 'Get, update, or delete an exchange rate.
 
 
-        GET /api/v1/flights/admin/exchange-rates/{id}/
+        GET /api/v1/flights/admin/exchange-rates/:id/
 
-        PUT /api/v1/flights/admin/exchange-rates/{id}/
+        PUT /api/v1/flights/admin/exchange-rates/:id/
 
-        DELETE /api/v1/flights/admin/exchange-rates/{id}/'
+        DELETE /api/v1/flights/admin/exchange-rates/:id/'
       parameters:
       - in: path
         name: id
@@ -2144,11 +2144,11 @@ paths:
       description: 'Get, update, or delete an exchange rate.
 
 
-        GET /api/v1/flights/admin/exchange-rates/{id}/
+        GET /api/v1/flights/admin/exchange-rates/:id/
 
-        PUT /api/v1/flights/admin/exchange-rates/{id}/
+        PUT /api/v1/flights/admin/exchange-rates/:id/
 
-        DELETE /api/v1/flights/admin/exchange-rates/{id}/'
+        DELETE /api/v1/flights/admin/exchange-rates/:id/'
       parameters:
       - in: path
         name: id
@@ -2185,11 +2185,11 @@ paths:
       description: 'Get, update, or delete an exchange rate.
 
 
-        GET /api/v1/flights/admin/exchange-rates/{id}/
+        GET /api/v1/flights/admin/exchange-rates/:id/
 
-        PUT /api/v1/flights/admin/exchange-rates/{id}/
+        PUT /api/v1/flights/admin/exchange-rates/:id/
 
-        DELETE /api/v1/flights/admin/exchange-rates/{id}/'
+        DELETE /api/v1/flights/admin/exchange-rates/:id/'
       parameters:
       - in: path
         name: id
@@ -2225,11 +2225,11 @@ paths:
       description: 'Get, update, or delete an exchange rate.
 
 
-        GET /api/v1/flights/admin/exchange-rates/{id}/
+        GET /api/v1/flights/admin/exchange-rates/:id/
 
-        PUT /api/v1/flights/admin/exchange-rates/{id}/
+        PUT /api/v1/flights/admin/exchange-rates/:id/
 
-        DELETE /api/v1/flights/admin/exchange-rates/{id}/'
+        DELETE /api/v1/flights/admin/exchange-rates/:id/'
       parameters:
       - in: path
         name: id
@@ -2331,11 +2331,11 @@ paths:
       description: 'Get, update, or delete a service fee.
 
 
-        GET /api/v1/flights/admin/service-fees/{id}/
+        GET /api/v1/flights/admin/service-fees/:id/
 
-        PUT /api/v1/flights/admin/service-fees/{id}/
+        PUT /api/v1/flights/admin/service-fees/:id/
 
-        DELETE /api/v1/flights/admin/service-fees/{id}/'
+        DELETE /api/v1/flights/admin/service-fees/:id/'
       parameters:
       - in: path
         name: id
@@ -2360,11 +2360,11 @@ paths:
       description: 'Get, update, or delete a service fee.
 
 
-        GET /api/v1/flights/admin/service-fees/{id}/
+        GET /api/v1/flights/admin/service-fees/:id/
 
-        PUT /api/v1/flights/admin/service-fees/{id}/
+        PUT /api/v1/flights/admin/service-fees/:id/
 
-        DELETE /api/v1/flights/admin/service-fees/{id}/'
+        DELETE /api/v1/flights/admin/service-fees/:id/'
       parameters:
       - in: path
         name: id
@@ -2401,11 +2401,11 @@ paths:
       description: 'Get, update, or delete a service fee.
 
 
-        GET /api/v1/flights/admin/service-fees/{id}/
+        GET /api/v1/flights/admin/service-fees/:id/
 
-        PUT /api/v1/flights/admin/service-fees/{id}/
+        PUT /api/v1/flights/admin/service-fees/:id/
 
-        DELETE /api/v1/flights/admin/service-fees/{id}/'
+        DELETE /api/v1/flights/admin/service-fees/:id/'
       parameters:
       - in: path
         name: id
@@ -2441,11 +2441,11 @@ paths:
       description: 'Get, update, or delete a service fee.
 
 
-        GET /api/v1/flights/admin/service-fees/{id}/
+        GET /api/v1/flights/admin/service-fees/:id/
 
-        PUT /api/v1/flights/admin/service-fees/{id}/
+        PUT /api/v1/flights/admin/service-fees/:id/
 
-        DELETE /api/v1/flights/admin/service-fees/{id}/'
+        DELETE /api/v1/flights/admin/service-fees/:id/'
       parameters:
       - in: path
         name: id
@@ -2637,7 +2637,7 @@ paths:
       description: 'Get, update, or delete a booking.
 
 
-        GET /api/v1/flights/bookings/{booking_reference}/'
+        GET /api/v1/flights/bookings/:booking_reference/'
       parameters:
       - in: path
         name: booking_reference
@@ -2659,7 +2659,7 @@ paths:
       description: 'Cancel a booking.
 
 
-        POST /api/v1/flights/bookings/{booking_reference}/cancel/
+        POST /api/v1/flights/bookings/:booking_reference/cancel/
 
 
         Security notes:
@@ -2692,11 +2692,11 @@ paths:
       description: 'List or update passengers for a booking.
 
 
-        GET /api/v1/flights/bookings/{booking_reference}/passengers/
+        GET /api/v1/flights/bookings/:booking_reference/passengers/
 
-        POST /api/v1/flights/bookings/{booking_reference}/passengers/
+        POST /api/v1/flights/bookings/:booking_reference/passengers/
 
-        PUT /api/v1/flights/bookings/{booking_reference}/passengers/{passenger_id}/'
+        PUT /api/v1/flights/bookings/:booking_reference/passengers/:passenger_id/'
       parameters:
       - in: path
         name: booking_reference
@@ -2741,7 +2741,7 @@ paths:
       description: 'Pay for a booking using wallet balance.
 
 
-        POST /api/v1/flights/bookings/{booking_reference}/pay/wallet/
+        POST /api/v1/flights/bookings/:booking_reference/pay/wallet/
 
 
         This view implements a charge-first payment flow:
@@ -2776,7 +2776,7 @@ paths:
       description: 'Check if user can pay for a booking.
 
 
-        GET /api/v1/flights/bookings/{booking_reference}/payment-eligibility/'
+        GET /api/v1/flights/bookings/:booking_reference/payment-eligibility/'
       parameters:
       - in: path
         name: booking_reference
@@ -2798,7 +2798,7 @@ paths:
       description: 'Revert a payment_processing booking back to pending_payment.
 
 
-        POST /api/v1/flights/bookings/{booking_reference}/revert-payment/
+        POST /api/v1/flights/bookings/:booking_reference/revert-payment/
 
 
         Called when user navigates back from the payment screen after
@@ -2827,7 +2827,7 @@ paths:
       description: 'Download flight ticket as PDF.
 
 
-        GET /api/v1/flights/bookings/{booking_reference}/ticket/
+        GET /api/v1/flights/bookings/:booking_reference/ticket/
 
 
         Returns a PDF file with:
@@ -2987,7 +2987,7 @@ paths:
       description: 'Get detailed information about a specific offer.
 
 
-        GET /api/v1/flights/offers/{offer_id}/
+        GET /api/v1/flights/offers/:offer_id/
 
 
         Note: Requires authentication to prevent unauthorized access to offer data.'
@@ -3009,11 +3009,11 @@ paths:
   /api/v1/flights/search/:
     post:
       operationId: flights_search_create
-      description: "Search for flights.\n\nPOST /api/v1/flights/search/\n{\n    \"\
+      description: "Search for flights.\n\nPOST /api/v1/flights/search/\n`{\n    \"\
         origin\": \"BGW\",\n    \"destination\": \"DXB\",\n    \"departure_date\"\
         : \"2024-03-15\",\n    \"return_date\": \"2024-03-20\",  // optional\n   \
         \ \"adults\": 2,\n    \"children\": 1,\n    \"infants\": 0,\n    \"cabin_class\"\
-        : \"economy\"\n}"
+        : \"economy\"\n}`"
       tags:
       - flights
       security:
@@ -3029,7 +3029,7 @@ paths:
       description: 'Poll flight search status and retrieve results.
 
 
-        GET /api/v1/flights/search/{search_id}/status/
+        GET /api/v1/flights/search/:search_id/status/
 
 
         Returns:
@@ -3755,7 +3755,7 @@ paths:
       description: 'Admin: Check refund status.
 
 
-        GET /api/v1/payments/wayl/admin/refund-status/{refund_id}/'
+        GET /api/v1/payments/wayl/admin/refund-status/:refund_id/'
       parameters:
       - in: path
         name: refund_id
@@ -3885,7 +3885,7 @@ paths:
 
         4. Create WaylPaymentLink + FlightTransaction (pending)
 
-        5. Call Wayl API → return {payment_url, reference_id, total_charged}'
+        5. Call Wayl API → return `{payment_url, reference_id, total_charged}`'
       tags:
       - payments
       security:
@@ -3916,7 +3916,7 @@ paths:
       description: 'Handle redirect from Wayl after payment.
 
 
-        GET /api/v1/payments/wayl/redirect/?referenceId={referenceId}&orderid={orderId}
+        GET /api/v1/payments/wayl/redirect/?referenceId=:referenceId&orderid=:orderId
 
 
         Wayl appends referenceId and orderid as query params to the redirect URL.
@@ -3955,7 +3955,7 @@ paths:
       description: 'Check Wayl payment status (for app polling).
 
 
-        GET /api/v1/payments/wayl/status/{reference_id}/'
+        GET /api/v1/payments/wayl/status/:reference_id/'
       parameters:
       - in: path
         name: reference_id
@@ -4013,22 +4013,21 @@ paths:
 
         - POST /applications/ - Create new draft application
 
-        - GET /applications/{id}/ - Get application details
+        - GET /applications/:id/ - Get application details
 
-        - PUT/PATCH /applications/{id}/ - Update draft application
+        - PUT/PATCH /applications/:id/ - Update draft application
 
-        - DELETE /applications/{id}/ - Delete draft application
+        - DELETE /applications/:id/ - Delete draft application
 
-        - POST /applications/{id}/upload_document/ - Upload document
+        - POST /applications/:id/upload_document/ - Upload document
 
-        - DELETE /applications/{id}/delete_document/ - Delete document
+        - DELETE /applications/:id/delete_document/ - Delete document
 
-        - POST /applications/{id}/submit/ - Submit application
+        - POST /applications/:id/submit/ - Submit application
 
-        - GET /applications/{id}/check_eligibility/ - Check if user can apply
+        - GET /applications/:id/check_eligibility/ - Check if user can apply
 
-        - GET /applications/{id}/history/ - Get application status history (admin
-        only)'
+        - GET /applications/:id/history/ - Get application status history (admin only)'
       parameters:
       - name: ordering
         required: false
@@ -4107,22 +4106,21 @@ paths:
 
         - POST /applications/ - Create new draft application
 
-        - GET /applications/{id}/ - Get application details
+        - GET /applications/:id/ - Get application details
 
-        - PUT/PATCH /applications/{id}/ - Update draft application
+        - PUT/PATCH /applications/:id/ - Update draft application
 
-        - DELETE /applications/{id}/ - Delete draft application
+        - DELETE /applications/:id/ - Delete draft application
 
-        - POST /applications/{id}/upload_document/ - Upload document
+        - POST /applications/:id/upload_document/ - Upload document
 
-        - DELETE /applications/{id}/delete_document/ - Delete document
+        - DELETE /applications/:id/delete_document/ - Delete document
 
-        - POST /applications/{id}/submit/ - Submit application
+        - POST /applications/:id/submit/ - Submit application
 
-        - GET /applications/{id}/check_eligibility/ - Check if user can apply
+        - GET /applications/:id/check_eligibility/ - Check if user can apply
 
-        - GET /applications/{id}/history/ - Get application status history (admin
-        only)'
+        - GET /applications/:id/history/ - Get application status history (admin only)'
       parameters:
       - in: path
         name: id
@@ -4187,22 +4185,21 @@ paths:
 
         - POST /applications/ - Create new draft application
 
-        - GET /applications/{id}/ - Get application details
+        - GET /applications/:id/ - Get application details
 
-        - PUT/PATCH /applications/{id}/ - Update draft application
+        - PUT/PATCH /applications/:id/ - Update draft application
 
-        - DELETE /applications/{id}/ - Delete draft application
+        - DELETE /applications/:id/ - Delete draft application
 
-        - POST /applications/{id}/upload_document/ - Upload document
+        - POST /applications/:id/upload_document/ - Upload document
 
-        - DELETE /applications/{id}/delete_document/ - Delete document
+        - DELETE /applications/:id/delete_document/ - Delete document
 
-        - POST /applications/{id}/submit/ - Submit application
+        - POST /applications/:id/submit/ - Submit application
 
-        - GET /applications/{id}/check_eligibility/ - Check if user can apply
+        - GET /applications/:id/check_eligibility/ - Check if user can apply
 
-        - GET /applications/{id}/history/ - Get application status history (admin
-        only)'
+        - GET /applications/:id/history/ - Get application status history (admin only)'
       parameters:
       - in: path
         name: id
@@ -4350,7 +4347,7 @@ paths:
 
         Admin can download any document, users can only download their own.
 
-        URL: /applications/{pk}/documents/{document_id}/download/
+        URL: /applications/:pk/documents/:document_id/download/
 
 
         Supports both S3 storage (returns JSON with presigned URL) and legacy local
@@ -4388,7 +4385,7 @@ paths:
 
         Admin can download any application, users can only download their own.
 
-        URL: /applications/{pk}/download-all-documents/
+        URL: /applications/:pk/download-all-documents/
 
 
         Supports both S3 storage and legacy local storage.'
@@ -4418,7 +4415,7 @@ paths:
 
         Admin only endpoint.
 
-        URL: /applications/{pk}/history/'
+        URL: /applications/:pk/history/'
       parameters:
       - in: path
         name: id
@@ -7253,7 +7250,7 @@ paths:
 
         Admin only endpoint.
 
-        URL: /scholarship-applications/{pk}/history/'
+        URL: /scholarship-applications/:pk/history/'
       parameters:
       - in: path
         name: id
@@ -10505,7 +10502,8 @@ paths:
 
         Accepts optional refund_amount parameter:
 
-        - If provided and > 0: refund that specific amount (must be <= paid amount)
+        - If provided and &gt; 0: refund that specific amount (must be &lt;= paid
+        amount)
 
         - If not provided: default to full refund (backwards compat)
 
@@ -11850,7 +11848,6 @@ components:
         user_balance:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           readOnly: true
         program:
           type: integer
@@ -11861,7 +11858,6 @@ components:
         program_registration_fee:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           readOnly: true
         program_university_name:
           type: string
@@ -12290,7 +12286,6 @@ components:
         discount_value:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
         applicable_sections: {}
         start_date:
           type: string
@@ -12320,7 +12315,6 @@ components:
         max_discount_amount:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Cap for percentage coupons. 0 = no cap.
         description:
           type: string
@@ -12365,7 +12359,6 @@ components:
         discount_value:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
         applicable_sections: {}
         sections_display:
           type: string
@@ -12405,7 +12398,6 @@ components:
         max_discount_amount:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Cap for percentage coupons. 0 = no cap.
       required:
       - code
@@ -12431,7 +12423,6 @@ components:
         price:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Delivery price in IQD
         is_active:
           type: boolean
@@ -12649,7 +12640,6 @@ components:
         usd_to_iqd:
           type: string
           format: decimal
-          pattern: ^-?\d{0,6}(?:\.\d{0,4})?$
           description: 'Exchange rate: 1 USD = X IQD'
         source:
           $ref: '#/components/schemas/SourceEnum'
@@ -12689,7 +12679,6 @@ components:
         usd_to_iqd:
           type: string
           format: decimal
-          pattern: ^-?\d{0,6}(?:\.\d{0,4})?$
           description: 'Exchange rate: 1 USD = X IQD'
         source:
           $ref: '#/components/schemas/SourceEnum'
@@ -12816,12 +12805,10 @@ components:
         final_amount_iqd:
           type: string
           format: decimal
-          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
           description: Final amount user pays (total + service fee)
         coupon_discount:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
         passengers_count:
           type: integer
           readOnly: true
@@ -12892,7 +12879,6 @@ components:
         final_amount_iqd:
           type: string
           format: decimal
-          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
           description: Final amount user pays (total + service fee)
         passengers_count:
           type: integer
@@ -12922,7 +12908,6 @@ components:
         percentage:
           type: string
           format: decimal
-          pattern: ^-?\d{0,3}(?:\.\d{0,2})?$
           description: Service fee percentage (e.g., 7.00 for 7%)
         is_active:
           type: boolean
@@ -12960,7 +12945,6 @@ components:
         percentage:
           type: string
           format: decimal
-          pattern: ^-?\d{0,3}(?:\.\d{0,2})?$
           description: Service fee percentage (e.g., 7.00 for 7%)
         is_active:
           type: boolean
@@ -12997,28 +12981,23 @@ components:
         amount_usd:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Transaction amount in USD
         amount_iqd:
           type: string
           format: decimal
-          pattern: ^-?\d{0,10}(?:\.\d{0,2})?$
           description: Transaction amount in IQD
         exchange_rate:
           type: string
           format: decimal
-          pattern: ^-?\d{0,6}(?:\.\d{0,4})?$
           description: Exchange rate used for this transaction
         wallet_balance_before:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           nullable: true
           description: User wallet balance before transaction
         wallet_balance_after:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           nullable: true
           description: User wallet balance after transaction
         booking_reference:
@@ -13122,7 +13101,6 @@ components:
         amount:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Gift code value in IQD (Iraqi Dinar)
         status:
           allOf:
@@ -13197,7 +13175,6 @@ components:
         amount:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Gift code value in IQD
         expires_at:
           type: string
@@ -13238,7 +13215,6 @@ components:
         amount:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Gift code value in IQD (Iraqi Dinar)
         status:
           $ref: '#/components/schemas/StatusDb3Enum'
@@ -13290,7 +13266,6 @@ components:
         gift_code_amount:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           readOnly: true
         user:
           type: integer
@@ -13311,14 +13286,12 @@ components:
         balance_before:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           readOnly: true
           nullable: true
           description: User balance before redemption attempt (for successful redemptions)
         balance_after:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           readOnly: true
           nullable: true
           description: User balance after redemption (for successful redemptions)
@@ -13399,7 +13372,6 @@ components:
         price_per_page:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Price per page for this document type in this language pair
         is_active:
           type: boolean
@@ -13439,7 +13411,6 @@ components:
         price_per_page:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
         is_active:
           type: boolean
           default: true
@@ -14274,7 +14245,6 @@ components:
         user_balance:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           readOnly: true
         program:
           type: integer
@@ -14285,7 +14255,6 @@ components:
         program_registration_fee:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           readOnly: true
         program_university_name:
           type: string
@@ -14517,7 +14486,6 @@ components:
         discount_value:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
         applicable_sections: {}
         start_date:
           type: string
@@ -14547,7 +14515,6 @@ components:
         max_discount_amount:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Cap for percentage coupons. 0 = no cap.
         description:
           type: string
@@ -14576,7 +14543,6 @@ components:
         price:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Delivery price in IQD
         is_active:
           type: boolean
@@ -14672,7 +14638,6 @@ components:
         usd_to_iqd:
           type: string
           format: decimal
-          pattern: ^-?\d{0,6}(?:\.\d{0,4})?$
           description: 'Exchange rate: 1 USD = X IQD'
         source:
           $ref: '#/components/schemas/SourceEnum'
@@ -14731,7 +14696,6 @@ components:
         percentage:
           type: string
           format: decimal
-          pattern: ^-?\d{0,3}(?:\.\d{0,2})?$
           description: Service fee percentage (e.g., 7.00 for 7%)
         is_active:
           type: boolean
@@ -14773,7 +14737,6 @@ components:
         amount:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Gift code value in IQD (Iraqi Dinar)
         status:
           allOf:
@@ -14870,7 +14833,6 @@ components:
         price_per_page:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Price per page for this document type in this language pair
         is_active:
           type: boolean
@@ -14929,26 +14891,23 @@ components:
           type: string
           readOnly: true
         requirements:
-          description: 'Array of requirement objects with structure: [{"text": "requirement
-            text", "needs_image": true/false}]'
+          description: 'Array of requirement objects with structure: [`{"text": "requirement
+            text", "needs_image": true/false}`]'
         required_docs:
           description: Array of required document strings, e.g., ["Passport copy",
             "Transcripts", "CV"]
         yearly_cost:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Yearly tuition cost
         registration_fee:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           nullable: true
           description: One-time registration/application fee
         cost_of_living:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Estimated yearly cost of living
         image_s3_key:
           type: string
@@ -15056,8 +15015,8 @@ components:
           type: string
           readOnly: true
         requirements:
-          description: 'Array of requirement objects with structure: [{"text": "requirement
-            text", "needs_image": true/false}]'
+          description: 'Array of requirement objects with structure: [`{"text": "requirement
+            text", "needs_image": true/false}`]'
         benefits:
           description: Array of benefit strings, e.g., ["Full tuition coverage", "Monthly
             stipend", "Free accommodation"]
@@ -15075,7 +15034,6 @@ components:
         application_cost:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: One-time application/processing fee
         duration:
           type: integer
@@ -15182,7 +15140,6 @@ components:
         application_cost:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           readOnly: true
         first_name:
           type: string
@@ -15271,17 +15228,14 @@ components:
         printing_price:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Price for printing documents
         delivery_price:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Price for delivery
         total_price:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Total price including application cost, printing, and delivery
         submitted_at:
           type: string
@@ -15320,7 +15274,6 @@ components:
           type: string
           description: Unique identifier (e.g., government, university, private)
           maxLength: 100
-          pattern: ^[-a-zA-Z0-9_]+$
         created_at:
           type: string
           format: date-time
@@ -15351,11 +15304,9 @@ components:
         price_per_page:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
         price_per_page_reverse:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           nullable: true
           description: Price per page for reverse direction (target → source)
         vice_versa:
@@ -15536,7 +15487,6 @@ components:
         balance:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           readOnly: true
           description: User account balance in IQD (Iraqi Dinar)
         account_number:
@@ -15631,26 +15581,23 @@ components:
           type: string
           readOnly: true
         requirements:
-          description: 'Array of requirement objects with structure: [{"text": "requirement
-            text", "needs_image": true/false}]'
+          description: 'Array of requirement objects with structure: [`{"text": "requirement
+            text", "needs_image": true/false}`]'
         required_docs:
           description: Array of required document strings, e.g., ["Passport copy",
             "Transcripts", "CV"]
         yearly_cost:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Yearly tuition cost
         registration_fee:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           nullable: true
           description: One-time registration/application fee
         cost_of_living:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Estimated yearly cost of living
         image_s3_key:
           type: string
@@ -15762,8 +15709,8 @@ components:
           readOnly: true
         requirements:
           readOnly: true
-          description: 'Array of requirement objects with structure: [{"text": "requirement
-            text", "needs_image": true/false}]'
+          description: 'Array of requirement objects with structure: [`{"text": "requirement
+            text", "needs_image": true/false}`]'
         required_docs:
           readOnly: true
           description: Array of required document strings, e.g., ["Passport copy",
@@ -15771,20 +15718,17 @@ components:
         yearly_cost:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           readOnly: true
           description: Yearly tuition cost
         registration_fee:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           readOnly: true
           nullable: true
           description: One-time registration/application fee
         cost_of_living:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           readOnly: true
           description: Estimated yearly cost of living
         created_at:
@@ -15947,8 +15891,8 @@ components:
           type: string
           readOnly: true
         requirements:
-          description: 'Array of requirement objects with structure: [{"text": "requirement
-            text", "needs_image": true/false}]'
+          description: 'Array of requirement objects with structure: [`{"text": "requirement
+            text", "needs_image": true/false}`]'
         benefits:
           description: Array of benefit strings, e.g., ["Full tuition coverage", "Monthly
             stipend", "Free accommodation"]
@@ -15966,7 +15910,6 @@ components:
         application_cost:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: One-time application/processing fee
         duration:
           type: integer
@@ -16096,7 +16039,6 @@ components:
         application_cost:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           readOnly: true
         first_name:
           type: string
@@ -16185,17 +16127,14 @@ components:
         printing_price:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Price for printing documents
         delivery_price:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Price for delivery
         total_price:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Total price including application cost, printing, and delivery
         submitted_at:
           type: string
@@ -16271,7 +16210,6 @@ components:
         user_balance:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           readOnly: true
         user_full_name:
           type: string
@@ -16292,7 +16230,6 @@ components:
         application_cost:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           readOnly: true
         first_name:
           type: string
@@ -16400,17 +16337,14 @@ components:
         printing_price:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Price for printing documents
         delivery_price:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Price for delivery
         total_price:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Total price including application cost, printing, and delivery
         submitted_at:
           type: string
@@ -16582,7 +16516,6 @@ components:
         application_cost:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           readOnly: true
         status:
           $ref: '#/components/schemas/Status1d5Enum'
@@ -16656,7 +16589,6 @@ components:
         application_cost:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: One-time application/processing fee
         language_name:
           type: string
@@ -16732,7 +16664,6 @@ components:
           type: string
           description: Unique identifier (e.g., government, university, private)
           maxLength: 100
-          pattern: ^[-a-zA-Z0-9_]+$
         created_at:
           type: string
           format: date-time
@@ -16936,18 +16867,15 @@ components:
         amount:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Transaction amount in IQD
         balance_before:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           nullable: true
           description: User balance before transaction (for wallet payments)
         balance_after:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           nullable: true
           description: User balance after transaction (for wallet payments)
         description:
@@ -17032,11 +16960,9 @@ components:
         price_per_page:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
         price_per_page_reverse:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           nullable: true
           description: Price per page for reverse direction (target → source)
         vice_versa:
@@ -17098,7 +17024,6 @@ components:
         price_per_page:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
         reverse_price:
           type: string
           readOnly: true
@@ -17301,7 +17226,6 @@ components:
         gift_code_amount:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           readOnly: true
         status:
           $ref: '#/components/schemas/Status74cEnum'
@@ -17409,7 +17333,6 @@ components:
         balance:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           readOnly: true
           description: User account balance in IQD (Iraqi Dinar)
         account_number:
@@ -17517,7 +17440,6 @@ components:
         amount:
           type: string
           format: decimal
-          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
           description: Transaction amount in IQD
         description:
           type: string
