@@ -1,0 +1,1 @@
+{"openapi":"3.0.3","info":{"title":"Minimal API","version":"1.0.0","description":"Minimal OpenAPI 3 specification used as a placeholder so the API Reference can be built. No endpoints are currently defined."},"servers":[{"url":"https://api.placeholder.local","description":"Placeholder server"}],"paths":{}}
