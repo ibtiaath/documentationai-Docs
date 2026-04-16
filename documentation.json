@@ -1,5 +1,5 @@
 {
-  "name": "Starter Kit",
+  "name": "ibtiaath API",
   "colors": {
     "light": {
       "brand": "#F97316"
@@ -80,7 +80,8 @@
           {
             "group": "api",
             "pages": [],
-            "icon": "a-arrow-down"
+            "icon": "a-arrow-down",
+            "openapi": "api-reference/openapi.yaml"
           }
         ]
       },
@@ -140,5 +141,7 @@
         ]
       }
     ]
-  }
+  },
+  "title": "ibtiaath API",
+  "description": "internal docs"
 }
