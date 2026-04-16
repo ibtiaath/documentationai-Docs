@@ -13148,9 +13148,6 @@ components:
         * `promotion` - Promotion
 
         * `general` - General Announcement'
-    NullEnum:
-      enum:
-      - null
     PaginatedApplicationList:
       type: object
       properties:
@@ -15091,8 +15088,7 @@ components:
           oneOf:
           - $ref: '#/components/schemas/EducationLevelEnum'
           - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
-          - type: 'null'
+          nullable: true
         role:
           allOf:
           - $ref: '#/components/schemas/RoleEnum'
@@ -16965,8 +16961,7 @@ components:
           oneOf:
           - $ref: '#/components/schemas/EducationLevelEnum'
           - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
-          - type: 'null'
+          nullable: true
         role:
           allOf:
           - $ref: '#/components/schemas/RoleEnum'
