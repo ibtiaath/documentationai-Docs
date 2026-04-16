@@ -756,7 +756,7 @@ paths:
       description: 'Get a single API request log detail.
 
 
-        GET /api/v1/analytics/api-logs/<id>/'
+        GET /api/v1/analytics/api-logs/{id}/'
       parameters:
       - in: path
         name: id
@@ -1361,9 +1361,9 @@ paths:
       description: 'Admin: Get/update eSIM order detail.
 
 
-        GET   /api/v1/esim/admin/orders/<order_reference>/
+        GET   /api/v1/esim/admin/orders/{order_reference}/
 
-        PATCH /api/v1/esim/admin/orders/<order_reference>/'
+        PATCH /api/v1/esim/admin/orders/{order_reference}/'
       parameters:
       - in: path
         name: order_reference
@@ -1440,7 +1440,7 @@ paths:
       description: 'Get eSIM order detail (owner only).
 
 
-        GET /api/v1/esim/orders/<order_reference>/
+        GET /api/v1/esim/orders/{order_reference}/
 
         Returns QR code, installation info, etc.'
       parameters:
@@ -1464,7 +1464,7 @@ paths:
       description: 'Get eSIM data usage (owner only).
 
 
-        GET /api/v1/esim/orders/<order_reference>/usage/
+        GET /api/v1/esim/orders/{order_reference}/usage/
 
         Proxies Airalo usage API.'
       parameters:
@@ -1522,7 +1522,7 @@ paths:
       description: 'List eSIM packages for a country.
 
 
-        GET /api/v1/esim/packages/?country=<slug>
+        GET /api/v1/esim/packages/?country={slug}
 
         Only returns final_price_iqd — NEVER price_usd/commission.'
       tags:
@@ -3029,7 +3029,7 @@ paths:
       description: 'Poll flight search status and retrieve results.
 
 
-        GET /api/v1/flights/search/<search_id>/status/
+        GET /api/v1/flights/search/{search_id}/status/
 
 
         Returns:
@@ -3755,7 +3755,7 @@ paths:
       description: 'Admin: Check refund status.
 
 
-        GET /api/v1/payments/wayl/admin/refund-status/<refund_id>/'
+        GET /api/v1/payments/wayl/admin/refund-status/{refund_id}/'
       parameters:
       - in: path
         name: refund_id
@@ -3916,7 +3916,7 @@ paths:
       description: 'Handle redirect from Wayl after payment.
 
 
-        GET /api/v1/payments/wayl/redirect/?referenceId=<referenceId>&orderid=<orderId>
+        GET /api/v1/payments/wayl/redirect/?referenceId={referenceId}&orderid={orderId}
 
 
         Wayl appends referenceId and orderid as query params to the redirect URL.
@@ -3955,7 +3955,7 @@ paths:
       description: 'Check Wayl payment status (for app polling).
 
 
-        GET /api/v1/payments/wayl/status/<reference_id>/'
+        GET /api/v1/payments/wayl/status/{reference_id}/'
       parameters:
       - in: path
         name: reference_id
