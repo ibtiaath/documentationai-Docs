@@ -80,8 +80,7 @@
           {
             "group": "api",
             "pages": [],
-            "icon": "a-arrow-down",
-            "openapi": "api-reference/openapi-minimal2.json"
+            "icon": "a-arrow-down"
           }
         ]
       },
