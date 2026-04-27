@@ -1,0 +1,189 @@
+---
+title: Buy an eSIM
+description: Browse data packages by country, create an order, pay, and install the eSIM.
+---
+
+eSIM data plans are provisioned through Airalo. The user picks a country, selects a package, pays from their wallet, and receives an installation QR code.
+
+## The flow
+
+<Mermaid>
+sequenceDiagram
+    Client->>API: GET /esim/countries/
+    API-->>Client: list of countries
+    Client->>API: GET /esim/packages/?country=TR
+    API-->>Client: packages (1GB, 5GB, ...)
+    Client->>API: POST /esim/orders/create/
+    API-->>Client: 201, order + payment URL
+    Client->>API: GET /esim/orders/{ref}/
+    API-->>Client: 200, QR code + activation code
+</Mermaid>
+
+## Steps
+
+<Steps>
+  <Step title="List countries">
+    ```http
+    GET /api/v1/esim/countries/
+    ```
+
+    Public — no auth required.
+
+    Response:
+    ```json
+    {
+      "results": [
+        { "code": "TR", "name": "Turkey", "flag": "🇹🇷" },
+        { "code": "AE", "name": "United Arab Emirates", "flag": "🇦🇪" }
+      ]
+    }
+    ```
+  </Step>
+
+  <Step title="List packages for a country">
+    ```http
+    GET /api/v1/esim/packages/?country=TR
+    ```
+
+    Response:
+    ```json
+    {
+      "results": [
+        {
+          "id": "tr-mobile-7days-1gb",
+          "title": "1 GB · 7 days",
+          "data_gb": 1,
+          "validity_days": 7,
+          "price": "12500.00",
+          "currency": "IQD"
+        },
+        {
+          "id": "tr-mobile-30days-10gb",
+          "title": "10 GB · 30 days",
+          "data_gb": 10,
+          "validity_days": 30,
+          "price": "85000.00",
+          "currency": "IQD"
+        }
+      ]
+    }
+    ```
+  </Step>
+
+  <Step title="Create the order (and pay)">
+    ```http
+    POST /api/v1/esim/orders/create/
+    Authorization: Bearer <access-token>
+    ```
+
+    <ParamField path="package_id" type="string" required />
+    <ParamField path="quantity" type="integer" default="1">
+      Multiple eSIMs of the same package can be ordered at once.
+    </ParamField>
+    <ParamField path="payment_method" type="string" required>
+      `wallet` (default) or `wayl` (Visa/Mastercard).
+    </ParamField>
+
+    Response:
+    ```json
+    {
+      "order_reference": "ESIM-2026-000123",
+      "status": "processing",
+      "total_amount": "12500.00",
+      "currency": "IQD"
+    }
+    ```
+  </Step>
+
+  <Step title="Poll for activation details">
+    Provisioning at Airalo takes a few seconds. Poll the order until status is `active`.
+
+    ```http
+    GET /api/v1/esim/orders/ESIM-2026-000123/
+    ```
+
+    Response when ready:
+    ```json
+    {
+      "order_reference": "ESIM-2026-000123",
+      "status": "active",
+      "esim": {
+        "qr_code_url": "https://...airalo.../qr.png",
+        "activation_code": "LPA:1$consumer.airalo.com$ABCDEF...",
+        "iccid": "8901260...",
+        "manual_install": {
+          "sm_dp_address": "consumer.airalo.com",
+          "activation_code": "ABCDEF..."
+        }
+      }
+    }
+    ```
+  </Step>
+
+  <Step title="Install on the device">
+    The user has two options:
+
+    1. Scan the `qr_code_url` with the device's camera (Settings → Add Cellular Plan).
+    2. Tap "Enter Details Manually" and use the `manual_install` fields.
+  </Step>
+</Steps>
+
+## Check data usage
+
+```http
+GET /api/v1/esim/orders/ESIM-2026-000123/usage/
+```
+
+Returns remaining data and validity:
+
+```json
+{
+  "data_used_mb": 320,
+  "data_total_mb": 1024,
+  "data_remaining_mb": 704,
+  "expires_at": "2026-05-05T00:00:00Z"
+}
+```
+
+## Order states
+
+| State | Meaning |
+|---|---|
+| `processing` | Payment received, waiting on Airalo provisioning |
+| `active` | Provisioned and ready to install |
+| `failed` | Provisioning failed; refund is automatic |
+| `expired` | Validity period ended |
+
+## Errors
+
+<Expandable title="eSIM-specific errors">
+  **Package unavailable**
+  ```json
+  { "detail": "Package is no longer available. Refresh the package list." }
+  ```
+
+  **Provisioning failed (auto-refund issued)**
+  ```json
+  {
+    "status": "failed",
+    "failure_reason": "Provider unavailable",
+    "refund": { "amount": "12500.00", "credited_to": "wallet" }
+  }
+  ```
+
+  **Insufficient balance**
+  ```json
+  { "detail": "Insufficient balance. Your balance is 5,000 IQD but 12,500 IQD is required." }
+  ```
+</Expandable>
+
+## Related
+
+<Cards>
+  <Card title="My orders" href="/api-reference/esim/orders-my">
+    List all eSIM orders for the current user.
+  </Card>
+  <Card title="Wayl payment" href="/guides/wayl-deposit" icon="credit-card">
+    Pay with Visa/Mastercard instead of the wallet.
+  </Card>
+</Cards>

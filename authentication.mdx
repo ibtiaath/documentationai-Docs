@@ -1,57 +1,272 @@
 ---
-title: Authentication (Sample)
-description: Sample guidance for authentication and OpenAPI usage.
+title: Authentication
+description: JWT bearer tokens, OTP email verification, Google and Apple Sign-In, token refresh, and password reset.
 ---
 
-## Overview
+The EBTE3ATH API authenticates with **JWT bearer tokens**. Most endpoints require a valid access token; a few public endpoints (registration, OTP, public banners, public programs) do not.
 
-This is sample content. Replace tokens, URLs, headers, and flows with your real authentication requirements.
+| | |
+|---|---|
+| **Header** | `Authorization: Bearer <access-token>` |
+| **Access token lifetime** | 1 hour |
+| **Refresh token lifetime** | 7 days |
+| **Algorithm** | HS256 |
+| **Token rotation** | Enabled — every refresh issues a new refresh token and blacklists the old one |
 
-<Callout kind="info">
+## Authentication flows
 
-This site ships with placeholder content for authentication. Update this page and `openapi.yaml` to match your real API before sharing with users.
+<Cards>
+  <Card title="Email + password (with OTP)" href="#email-password">
+    Default flow for new users.
+  </Card>
+  <Card title="Google Sign-In" href="#google-sign-in">
+    OAuth via Google ID token.
+  </Card>
+  <Card title="Apple Sign-In" href="#apple-sign-in">
+    OAuth via Apple identity token.
+  </Card>
+  <Card title="Password reset" href="#password-reset">
+    OTP-based reset flow.
+  </Card>
+</Cards>
 
-</Callout>
+## Email + password [#email-password]
 
-This API uses OpenAPI to describe endpoints, parameters, and responses. The reference is generated from `openapi.yaml`, so keep that file up to date as your API evolves.
+A 3-step flow: register → verify OTP → complete profile.
 
-## Authentication
+<Steps>
+  <Step title="Register">
+    ```http
+    POST /api/v1/users/register/
+    ```
 
-Use a bearer token in the `Authorization` header for authenticated requests. Replace the base URL and token with values for your own API.
+    <ParamField path="email" type="string" required>
+      Must be unique across the platform.
+    </ParamField>
 
-```bash
-curl https://api.example.com/v1/example \
-  -H "Authorization: Bearer YOUR_TOKEN"
+    <ParamField path="password" type="string" required>
+      Minimum 8 characters. Must contain at least one digit.
+    </ParamField>
+
+    Response (201):
+    ```json
+    {
+      "message": "Verification code sent to your email",
+      "email": "user@example.com"
+    }
+    ```
+  </Step>
+
+  <Step title="Verify OTP">
+    ```http
+    POST /api/v1/users/verify-otp/
+    ```
+
+    <ParamField path="email" type="string" required>
+      The same email used at registration.
+    </ParamField>
+
+    <ParamField path="otp_code" type="string" required>
+      The 6-digit code from the email.
+    </ParamField>
+
+    Response (200):
+    ```json
+    {
+      "message": "Email verified successfully",
+      "access": "eyJ...",
+      "refresh": "eyJ...",
+      "user": {
+        "id": 42,
+        "email": "user@example.com",
+        "role": "user",
+        "is_email_verified": true,
+        "profile_completed": false
+      }
+    }
+    ```
+
+    <Callout type="note">
+      OTP expires in 10 minutes. Maximum 3 attempts. Resend cooldown is 15 seconds.
+    </Callout>
+  </Step>
+
+  <Step title="Complete the profile">
+    ```http
+    POST /api/v1/users/complete-profile/
+    Authorization: Bearer <access-token>
+    ```
+
+    <ParamField path="full_name" type="string" required />
+    <ParamField path="phone_number" type="string" required>
+      Iraqi format: `+9647701234567`
+    </ParamField>
+    <ParamField path="date_of_birth" type="string" required>
+      ISO date: `1995-06-15`
+    </ParamField>
+    <ParamField path="city" type="string" required />
+    <ParamField path="education_level" type="string" required>
+      One of: `high_school`, `university_student`, `bachelors`, `masters`, `phd`.
+    </ParamField>
+  </Step>
+</Steps>
+
+## Google Sign-In [#google-sign-in]
+
+```http
+POST /api/v1/users/google-signin/
 ```
 
-<ParamField header="Authorization" param-type="string" required="true">
-  `Bearer YOUR_TOKEN`
+<ParamField path="id_token" type="string" required>
+  The Google ID token from the client SDK. The backend verifies it against Google's public keys.
 </ParamField>
 
-## Keep OpenAPI in sync
+<Tabs>
+  <Tab title="curl">
+    ```bash
+    curl -X POST 'https://api.ibtiaath.com/api/v1/users/google-signin/' \
+      -H 'Content-Type: application/json' \
+      -d '{ "id_token": "eyJhbGciOiJSUzI1NiIs..." }'
+    ```
+  </Tab>
+  <Tab title="JavaScript">
+    ```js
+    const { data } = await api.post('/users/google-signin/', { id_token });
+    const { access, refresh, is_new_user } = data;
+    ```
+  </Tab>
+</Tabs>
 
-Define your authentication and base settings in `openapi.yaml` so the API Reference stays accurate and consistent.
+The response is the standard `{ access, refresh, user }` plus `is_new_user: boolean`. First-time users are auto-created with the Google profile photo.
 
-At a minimum, you should:
+## Apple Sign-In [#apple-sign-in]
 
-- Define one or more security schemes that describe how clients authenticate (for example, bearer token, API key in a header, or other scheme).
-- Reference those security schemes on operations that require authentication so they are clearly marked as secured.
-- Set the correct base URL and any required global headers (for example, versioning or tenant headers) so example requests are copy-pasteable.
+```http
+POST /api/v1/users/apple-signin/
+```
 
-When your real authentication flow changes (for example, new header names, token formats, or additional requirements), update `openapi.yaml`. The generated API Reference will then reflect your current auth model without needing to edit each endpoint page by hand.
+<ParamField path="identity_token" type="string" required>
+  Apple identity token. Verified against Apple's public keys.
+</ParamField>
 
-## Using the API reference
+<ParamField path="authorization_code" type="string" required />
 
-Use the API Reference to explore endpoints, required parameters, and example responses. When you change authentication headers or base URLs, update `openapi.yaml` so the generated reference matches what your clients should use.
+<ParamField path="user" type="object">
+  Only provided on the **first** sign-in. Contains `name.firstName` and `name.lastName`.
+</ParamField>
 
-## Common mistakes
+<Callout type="warning">
+  Apple only sends the user's name on the first sign-in. Persist it on your side; subsequent sign-ins won't include it.
+</Callout>
 
-<Expandable title="Why am I getting a 401?" default-open="false">
+## Token refresh
 
-Verify that:
+```http
+POST /api/v1/study-abroad/auth/refresh/
+```
 
-- The token is valid and not expired.
-- The token is sent in the `Authorization` header.
-- The header value includes the `Bearer` prefix and a space before the token.
+<ParamField path="refresh" type="string" required>
+  The current refresh token.
+</ParamField>
 
-</Expandable>
+Returns a new `{ access, refresh }` pair. The previous refresh token is blacklisted immediately — store the new one.
+
+<Tabs>
+  <Tab title="JavaScript (interceptor)">
+    ```js
+    let refresh = localStorage.getItem('refresh');
+
+    api.interceptors.response.use(
+      (r) => r,
+      async (error) => {
+        if (error.response?.status === 401 && refresh) {
+          const { data } = await axios.post(
+            'https://api.ibtiaath.com/api/v1/study-abroad/auth/refresh/',
+            { refresh }
+          );
+          localStorage.setItem('refresh', data.refresh);
+          refresh = data.refresh;
+          api.defaults.headers.common['Authorization'] = `Bearer ${data.access}`;
+          error.config.headers['Authorization'] = `Bearer ${data.access}`;
+          return api(error.config);
+        }
+        return Promise.reject(error);
+      }
+    );
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    def refresh_tokens(refresh):
+        r = requests.post(
+            f"{BASE}/study-abroad/auth/refresh/",
+            json={"refresh": refresh},
+        )
+        r.raise_for_status()
+        return r.json()  # { access, refresh }
+    ```
+  </Tab>
+</Tabs>
+
+## Password reset [#password-reset]
+
+<Steps>
+  <Step title="Request a reset">
+    ```http
+    POST /api/v1/users/forgot-password/
+    ```
+    Body: `{ "email": "user@example.com" }`
+  </Step>
+  <Step title="Verify the OTP">
+    ```http
+    POST /api/v1/users/verify-password-reset/
+    ```
+    Body: `{ "email": "...", "otp_code": "123456" }`. Response includes a `reset_token`.
+  </Step>
+  <Step title="Set the new password">
+    ```http
+    POST /api/v1/users/reset-password/
+    ```
+    Body: `{ "reset_token": "...", "new_password": "NewSecurePass123!" }`
+  </Step>
+</Steps>
+
+## Logout
+
+```http
+POST /api/v1/study-abroad/auth/logout/
+Authorization: Bearer <access-token>
+```
+
+Body: `{ "refresh": "..." }`. Blacklists the refresh token and clears auth cookies on the dashboard.
+
+## Cookie-based auth (dashboard only)
+
+The web dashboard receives tokens as HTTP-only cookies in addition to the response body:
+
+```
+Set-Cookie: access_token=eyJ...; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=3600
+Set-Cookie: refresh_token=eyJ...; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=604800
+```
+
+Subsequent requests automatically include them. The refresh endpoint reads the cookie if no body is provided.
+
+## Errors
+
+| Status | Code | Cause |
+|---|---|---|
+| 401 | `token_not_valid` | Token expired, malformed, or for the wrong type |
+| 401 | — | No `Authorization` header |
+| 403 | `token_not_valid` | Token has been blacklisted (logout, rotation) |
+| 403 | — | Authenticated but not authorized for this resource |
+| 400 | — | Validation error on register / OTP / profile fields |
+
+See [Errors](/errors) for the full reference.
+
+## Security checklist
+
+- Use HTTPS for every request — the production API redirects HTTP.
+- Store refresh tokens in **secure** storage (Keychain / Keystore / HTTP-only cookie). Never in `localStorage` for production web apps.
+- Refresh tokens **before** they expire. Never on every request.
+- On logout, call `/auth/logout/` so the refresh token is blacklisted server-side.
+- Don't log tokens or include them in error reports sent to third parties.

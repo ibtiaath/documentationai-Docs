@@ -1,0 +1,71 @@
+---
+title: EBTE3ATH API
+description: REST API for study abroad, flights, eSIM, translations, and wallet operations on the Ibtiaath platform.
+---
+
+The EBTE3ATH API is a REST service that powers the Ibtiaath platform — study-abroad applications, flight booking, eSIM purchase, document translation, gift codes, and wallet payments.
+
+```http
+Base URL: https://api.ibtiaath.com/api/v1/
+```
+
+<Callout type="warning">
+  Every URL ends with a trailing slash. Requests without one return a 301 redirect.
+</Callout>
+
+## Get started
+
+<Cards>
+  <Card title="Quickstart" href="/quickstart" icon="rocket">
+    Register a user and make your first authenticated request in under 5 minutes.
+  </Card>
+  <Card title="Authentication" href="/authentication" icon="key">
+    JWT, OTP, Google Sign-In, Apple Sign-In, and token refresh.
+  </Card>
+  <Card title="API reference" href="/api-reference" icon="book">
+    Every endpoint, with a Try-It playground.
+  </Card>
+  <Card title="Use with AI" href="/use-with-ai" icon="sparkles">
+    Connect Cursor, Claude Code, or ChatGPT to these docs via MCP.
+  </Card>
+</Cards>
+
+## What's in the API
+
+<Cards>
+  <Card title="Study abroad" href="/guides/apply-program" icon="graduation-cap">
+    Browse programs and scholarships, submit applications, track status.
+  </Card>
+  <Card title="Flights" href="/guides/book-flight" icon="plane">
+    Search and book flights via the Duffel integration.
+  </Card>
+  <Card title="eSIM" href="/guides/buy-esim" icon="signal">
+    Buy and activate Airalo data plans for any country.
+  </Card>
+  <Card title="Translations" href="/guides/order-translation" icon="file-text">
+    Submit certified document translation orders.
+  </Card>
+  <Card title="Wallet" href="/guides/redeem-gift-code" icon="wallet">
+    Top up balance with gift codes; pay with Wayl gateway.
+  </Card>
+  <Card title="Notifications" href="/api-reference/notifications" icon="bell">
+    Register FCM tokens and receive push notifications.
+  </Card>
+</Cards>
+
+## Conventions
+
+| | |
+|---|---|
+| **Auth** | `Authorization: Bearer <jwt-access-token>` |
+| **Format** | All requests/responses are JSON |
+| **Currency** | IQD (Iraqi Dinar) unless stated |
+| **Timezone** | `Asia/Baghdad` |
+| **Pagination** | `?page=1&page_size=20` — see [Pagination](/pagination) |
+| **Rate limits** | See [Rate limits](/rate-limits) |
+| **Errors** | Standard HTTP codes + structured JSON — see [Errors](/errors) |
+
+## Support
+
+- Email: [support@ibtiaath.com](mailto:support@ibtiaath.com)
+- Status: [status.ibtiaath.com](https://status.ibtiaath.com)

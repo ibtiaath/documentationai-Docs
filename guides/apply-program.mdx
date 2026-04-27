@@ -1,0 +1,199 @@
+---
+title: Book a flight
+description: Search flights, select an offer, add passengers, and pay from the wallet.
+---
+
+The flights API wraps the Duffel provider. Search returns offers; the user picks one, you create a booking, attach passengers, and pay.
+
+## The flow
+
+<Mermaid>
+sequenceDiagram
+    Client->>API: POST /flights/search/
+    API-->>Client: search_id + offers
+    Client->>API: GET /flights/offers/{offer_id}/
+    API-->>Client: offer details + final price
+    Client->>API: POST /flights/bookings/
+    API-->>Client: 201, booking (status: pending)
+    Client->>API: POST /bookings/{ref}/passengers/
+    API-->>Client: 200, passengers attached
+    Client->>API: POST /bookings/{ref}/pay/wallet/
+    API-->>Client: 200, status: confirmed, ticket issued
+</Mermaid>
+
+## Steps
+
+<Steps>
+  <Step title="Search flights">
+    ```http
+    POST /api/v1/flights/search/
+    Authorization: Bearer <access-token>
+    ```
+
+    <ParamField path="origin" type="string" required>
+      IATA airport code: `BGW` (Baghdad).
+    </ParamField>
+    <ParamField path="destination" type="string" required>
+      IATA airport code: `IST` (Istanbul).
+    </ParamField>
+    <ParamField path="departure_date" type="string" required>
+      ISO date: `2026-05-15`.
+    </ParamField>
+    <ParamField path="return_date" type="string">
+      Omit for one-way.
+    </ParamField>
+    <ParamField path="passengers" type="object" required>
+      `{ "adults": 1, "children": 0, "infants": 0 }`
+    </ParamField>
+    <ParamField path="cabin_class" type="string" default="economy">
+      One of: `economy`, `premium_economy`, `business`, `first`.
+    </ParamField>
+
+    Response:
+    ```json
+    {
+      "search_id": "srch_01HXYZ...",
+      "offers": [
+        {
+          "id": "off_01HXYZ...",
+          "airline": { "name": "Turkish Airlines", "iata": "TK" },
+          "price": "450000.00",
+          "currency": "IQD",
+          "duration": "PT3H45M",
+          "segments": [ /* ... */ ]
+        }
+      ]
+    }
+    ```
+  </Step>
+
+  <Step title="Get the full offer (price may shift)">
+    Duffel offers are time-limited and prices can refresh on selection.
+
+    ```http
+    GET /api/v1/flights/offers/off_01HXYZ.../
+    ```
+
+    Use `price` from this response, not the search response.
+  </Step>
+
+  <Step title="Create the booking">
+    ```http
+    POST /api/v1/flights/bookings/
+    ```
+
+    Body:
+    ```json
+    { "offer_id": "off_01HXYZ..." }
+    ```
+
+    Response:
+    ```json
+    {
+      "booking_reference": "BK-2026-000042",
+      "status": "pending",
+      "total_amount": "450000.00",
+      "service_fee": "5000.00",
+      "currency": "IQD"
+    }
+    ```
+  </Step>
+
+  <Step title="Attach passengers">
+    ```http
+    POST /api/v1/flights/bookings/BK-2026-000042/passengers/
+    ```
+
+    Body:
+    ```json
+    {
+      "passengers": [
+        {
+          "type": "adult",
+          "title": "mr",
+          "given_name": "Mohammed",
+          "family_name": "Ahmed",
+          "born_on": "1995-06-15",
+          "gender": "m",
+          "email": "user@example.com",
+          "phone_number": "+9647801234567",
+          "passport_number": "A12345678",
+          "passport_expiry": "2028-05-15",
+          "passport_country": "IQ"
+        }
+      ]
+    }
+    ```
+  </Step>
+
+  <Step title="Check payment eligibility">
+    Confirms the offer is still available and the price hasn't changed.
+
+    ```http
+    GET /api/v1/flights/bookings/BK-2026-000042/payment-eligibility/
+    ```
+  </Step>
+
+  <Step title="Pay from the wallet">
+    ```http
+    POST /api/v1/flights/bookings/BK-2026-000042/pay/wallet/
+    ```
+
+    Returns `status: confirmed` and a Duffel-issued ticket. To download the e-ticket:
+
+    ```http
+    GET /api/v1/flights/bookings/BK-2026-000042/ticket/
+    ```
+  </Step>
+</Steps>
+
+## Cancel a booking
+
+```http
+POST /api/v1/flights/bookings/BK-2026-000042/cancel/
+```
+
+Refund eligibility depends on Duffel's rules for the specific fare. The response includes the refund amount and where it's credited (wallet or original payment method).
+
+## Service fee
+
+EBTE3ATH adds a fixed service fee on top of Duffel's price. To preview it before booking:
+
+```http
+GET /api/v1/flights/service-fee/?amount=450000
+```
+
+## Errors specific to flights
+
+<Expandable title="Flight-specific errors">
+  **Offer expired**
+  ```json
+  { "detail": "Offer is no longer available. Search again." }
+  ```
+
+  **Price changed**
+  ```json
+  { "detail": "Offer price has changed. Re-fetch the offer to confirm." }
+  ```
+
+  **Passport expiring too soon**
+  ```json
+  { "passport_expiry": ["Passport must be valid for at least 6 months from departure."] }
+  ```
+
+  **Insufficient wallet**
+  ```json
+  { "detail": "Insufficient balance. Your balance is 100,000 IQD but 455,000 IQD is required." }
+  ```
+</Expandable>
+
+## Related
+
+<Cards>
+  <Card title="Wayl payment" href="/guides/wayl-deposit" icon="credit-card">
+    Top up the wallet before paying for the flight.
+  </Card>
+  <Card title="Airports lookup" href="/api-reference/flights/airports" icon="search">
+    Find the right IATA codes by city or country.
+  </Card>
+</Cards>

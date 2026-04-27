@@ -1,58 +1,200 @@
 ---
 title: Quickstart
-description: Minimal steps to customize this sample starter kit.
+description: Register a user, verify their email, and make your first authenticated request.
 ---
-## Overview
 
-<Callout kind="alert" collapsed="false">
-  This site ships with placeholder content. Use this quickstart to replace it with your real product docs.
-</Callout>
+This guide takes you from zero to a working authenticated request in under 5 minutes.
 
-## 1. Update a page
+## Prerequisites
+
+- A terminal with `curl`, or a Node.js / Python environment.
+- An email address you can receive mail at (for the OTP code).
+
+## The flow
+
+<Mermaid>
+sequenceDiagram
+    Client->>API: POST /users/register/
+    API-->>Client: 201, OTP sent to email
+    Client->>API: POST /users/verify-otp/
+    API-->>Client: 200, access + refresh tokens
+    Client->>API: GET /users/me/ (with Bearer token)
+    API-->>Client: 200, user profile
+</Mermaid>
+
+## Steps
 
 <Steps>
-  <Step title="Edit introduction" icon="edit" title-type="p">
-    Replace the sample introduction with a concise overview of your product and the key actions you want new users to take first.
+  <Step title="Register a new account">
+    Send the email and password. The API replies with a 6-digit OTP sent to that email.
+
+    <Tabs>
+      <Tab title="curl">
+        ```bash
+        curl -X POST 'https://api.ibtiaath.com/api/v1/users/register/' \
+          -H 'Content-Type: application/json' \
+          -d '{
+            "email": "user@example.com",
+            "password": "SecurePass123!"
+          }'
+        ```
+      </Tab>
+      <Tab title="JavaScript">
+        ```js
+        import axios from 'axios';
+
+        const api = axios.create({ baseURL: 'https://api.ibtiaath.com/api/v1' });
+
+        const { data } = await api.post('/users/register/', {
+          email: 'user@example.com',
+          password: 'SecurePass123!',
+        });
+        console.log(data); // { message: "Verification code sent to your email", email: "..." }
+        ```
+      </Tab>
+      <Tab title="Python">
+        ```python
+        import requests
+
+        BASE = "https://api.ibtiaath.com/api/v1"
+
+        r = requests.post(f"{BASE}/users/register/", json={
+            "email": "user@example.com",
+            "password": "SecurePass123!",
+        })
+        r.raise_for_status()
+        print(r.json())
+        ```
+      </Tab>
+      <Tab title="Dart">
+        ```dart
+        import 'package:http/http.dart' as http;
+        import 'dart:convert';
+
+        const base = 'https://api.ibtiaath.com/api/v1';
+
+        final r = await http.post(
+          Uri.parse('$base/users/register/'),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode({
+            'email': 'user@example.com',
+            'password': 'SecurePass123!',
+          }),
+        );
+        print(jsonDecode(r.body));
+        ```
+      </Tab>
+    </Tabs>
   </Step>
 
-  <Step title="Preview your change" icon="monitor" title-type="p">
-    Use your dashboard board editor to confirm the updated introduction looks and reads as expected.
+  <Step title="Verify the OTP">
+    Check the email for a 6-digit code, then verify it. The response contains the access and refresh tokens.
+
+    <Tabs>
+      <Tab title="curl">
+        ```bash
+        curl -X POST 'https://api.ibtiaath.com/api/v1/users/verify-otp/' \
+          -H 'Content-Type: application/json' \
+          -d '{
+            "email": "user@example.com",
+            "otp_code": "123456"
+          }'
+        ```
+      </Tab>
+      <Tab title="JavaScript">
+        ```js
+        const { data: tokens } = await api.post('/users/verify-otp/', {
+          email: 'user@example.com',
+          otp_code: '123456',
+        });
+        const { access, refresh, user } = tokens;
+        ```
+      </Tab>
+      <Tab title="Python">
+        ```python
+        r = requests.post(f"{BASE}/users/verify-otp/", json={
+            "email": "user@example.com",
+            "otp_code": "123456",
+        })
+        tokens = r.json()
+        access, refresh = tokens["access"], tokens["refresh"]
+        ```
+      </Tab>
+    </Tabs>
+
+    Example response:
+
+    ```json
+    {
+      "message": "Email verified successfully",
+      "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+      "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+      "user": {
+        "id": 42,
+        "email": "user@example.com",
+        "role": "user",
+        "is_email_verified": true,
+        "profile_completed": false
+      }
+    }
+    ```
+
+    <Callout type="tip">
+      Save the `refresh` token in secure storage (Keychain on iOS, Keystore on Android, HTTP-only cookie on web). The `access` token expires in 1 hour; the `refresh` token in 7 days.
+    </Callout>
+  </Step>
+
+  <Step title="Make an authenticated request">
+    Send the access token as a Bearer header.
+
+    <Tabs>
+      <Tab title="curl">
+        ```bash
+        curl -X GET 'https://api.ibtiaath.com/api/v1/users/me/' \
+          -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+        ```
+      </Tab>
+      <Tab title="JavaScript">
+        ```js
+        api.defaults.headers.common['Authorization'] = `Bearer ${access}`;
+        const { data: me } = await api.get('/users/me/');
+        ```
+      </Tab>
+      <Tab title="Python">
+        ```python
+        r = requests.get(
+            f"{BASE}/users/me/",
+            headers={"Authorization": f"Bearer {access}"},
+        )
+        me = r.json()
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Refresh the token before it expires">
+    Access tokens last 1 hour. Use the refresh token to get a new pair before it expires.
+
+    ```bash
+    curl -X POST 'https://api.ibtiaath.com/api/v1/study-abroad/auth/refresh/' \
+      -H 'Content-Type: application/json' \
+      -d '{ "refresh": "eyJ..." }'
+    ```
+
+    The response is a new `{ access, refresh }` pair. The old refresh token is blacklisted immediately — store the new one.
   </Step>
 </Steps>
 
-## 2. Add a new page
+## What's next
 
-<Steps>
-  <Step title="Add a page" icon="file-text" title-type="p">
-    Create a new `page` by clicking on the + button from the left navigation bar of dashboard. If you are using git, create the .mdx file and add to navigation bar using documentation.json
-  </Step>
-</Steps>
-
-## Example onboarding flow (replace with yours)
-
-1. Sign up for an account and verify your email.
-
-2. Create your first workspace, project, or environment.
-
-3. Add one integration or data source to connect your existing tools.
-
-4. Complete a guided action (for example, run your first job or publish your first resource).
-
-5. Invite a teammate and assign a basic role or permission.
-
-## 3. Connect API Reference (optional)
-
-If you have an API, replace `openapi.yaml` with your real OpenAPI file. If you do not need an API reference, remove that tab either from dashboard or  `documentation.json`.
-
-## Next steps
-
-<Columns cols="2">
-  <Card title="Core Concepts" href="/concepts" icon="layers" horizontal="false">
-    Keep the mental model simple and easy to scan.
+<Cards>
+  <Card title="Authentication in depth" href="/authentication" icon="key">
+    Google/Apple sign-in, password reset, cookie-based auth for web dashboards.
   </Card>
-
-  <Card title="Authentication" href="/authentication" icon="lock" horizontal="false">
-    Add your real auth flows and security notes.
+  <Card title="Apply to a program" href="/guides/apply-program" icon="graduation-cap">
+    The first real flow most integrations need.
   </Card>
-</Columns>
-
+  <Card title="Errors" href="/errors" icon="circle-alert">
+    What every status code means and how to handle it.
+  </Card>
+</Cards>

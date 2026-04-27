@@ -1,0 +1,137 @@
+---
+title: Redeem a gift code
+description: Add wallet balance for a user by redeeming a gift code.
+---
+
+Gift codes are pre-paid IQD credits that users redeem to top up their wallet. Once redeemed, the balance is immediately available to pay for programs, flights, eSIMs, and translations.
+
+## The flow
+
+<Mermaid>
+sequenceDiagram
+    User->>App: Enters code "GIFT-ABC12345"
+    App->>API: POST /users/redeem-gift-card/
+    API-->>App: 200, { amount, new_balance }
+    App->>User: "25,000 IQD added"
+</Mermaid>
+
+## Endpoint
+
+```http
+POST /api/v1/users/redeem-gift-card/
+Authorization: Bearer <access-token>
+```
+
+<ParamField path="code" type="string" required>
+  The gift code as displayed to the user. Format: `GIFT-XXXXXXXX` (uppercase letters and digits).
+</ParamField>
+
+## Request
+
+<Tabs>
+  <Tab title="curl">
+    ```bash
+    curl -X POST 'https://api.ibtiaath.com/api/v1/users/redeem-gift-card/' \
+      -H 'Authorization: Bearer eyJ...' \
+      -H 'Content-Type: application/json' \
+      -d '{ "code": "GIFT-ABC12345" }'
+    ```
+  </Tab>
+  <Tab title="JavaScript">
+    ```js
+    const { data } = await api.post('/users/redeem-gift-card/', {
+      code: 'GIFT-ABC12345',
+    });
+    console.log(`Added ${data.amount} IQD. New balance: ${data.new_balance}`);
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    r = requests.post(
+        f"{BASE}/users/redeem-gift-card/",
+        json={"code": "GIFT-ABC12345"},
+        headers={"Authorization": f"Bearer {access}"},
+    )
+    data = r.json()
+    print(f"Added {data['amount']} IQD. New balance: {data['new_balance']}")
+    ```
+  </Tab>
+  <Tab title="Dart">
+    ```dart
+    final r = await http.post(
+      Uri.parse('$base/users/redeem-gift-card/'),
+      headers: {
+        'Authorization': 'Bearer $access',
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({'code': 'GIFT-ABC12345'}),
+    );
+    final data = jsonDecode(r.body);
+    ```
+  </Tab>
+</Tabs>
+
+## Response
+
+```json
+{
+  "success": true,
+  "message": "Gift card redeemed successfully",
+  "amount": "25000.00",
+  "new_balance": "25000.00"
+}
+```
+
+<ResponseField name="amount" type="string">
+  The amount that was added, in IQD. Formatted as a decimal string for precision.
+</ResponseField>
+
+<ResponseField name="new_balance" type="string">
+  The user's wallet balance after the redemption.
+</ResponseField>
+
+## Errors
+
+<Expandable title="All possible errors">
+  **Already redeemed**
+  ```json
+  { "detail": "Gift code has already been redeemed." }
+  ```
+
+  **Expired**
+  ```json
+  { "detail": "Gift code has expired." }
+  ```
+
+  **Invalid code**
+  ```json
+  { "code": ["Gift code not found."] }
+  ```
+
+  **Account blocked from redemption** (anti-fraud)
+  ```json
+  { "detail": "Gift card redemption is blocked for this account. Please contact support." }
+  ```
+
+  **Unauthenticated**
+  ```json
+  { "detail": "Authentication credentials were not provided." }
+  ```
+</Expandable>
+
+## UX guidelines
+
+- Strip whitespace and uppercase the code before sending: `code.trim().toUpperCase()`.
+- Validate the format client-side (`/^GIFT-[A-Z0-9]{8}$/`) before hitting the API.
+- On success, refresh the user's profile (`GET /users/me/`) to update the balance shown elsewhere in the UI.
+
+## Related
+
+<Cards>
+  <Card title="Wayl payments" href="/guides/wayl-deposit" icon="credit-card">
+    Top up with a Visa or Mastercard instead of a gift code.
+  </Card>
+  <Card title="Coupons" href="/api-reference/coupons" icon="tag">
+    Apply a discount code at checkout (different from gift codes).
+  </Card>
+</Cards>

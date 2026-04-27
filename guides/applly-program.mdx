@@ -1,0 +1,178 @@
+---
+title: Apply to a study-abroad program
+description: Browse programs, submit an application, upload documents, and pay the fee.
+---
+
+This guide walks through the full study-abroad application flow: discover programs, submit a draft application, upload required documents, and pay from the wallet.
+
+## The flow
+
+<Mermaid>
+sequenceDiagram
+    Client->>API: GET /study-abroad/programs-public/
+    API-->>Client: list of programs
+    Client->>API: POST /study-abroad/applications/
+    API-->>Client: 201, draft application
+    Client->>API: POST /applications/{id}/upload_document/
+    API-->>Client: 200, doc attached
+    Client->>API: POST /applications/{id}/submit/
+    API-->>Client: 200, status: submitted
+    Client->>API: POST /applications/{id}/process_payment/
+    API-->>Client: 200, status: paid
+</Mermaid>
+
+## Steps
+
+<Steps>
+  <Step title="Browse programs">
+    Public endpoint — no auth required.
+
+    ```bash
+    curl 'https://api.ibtiaath.com/api/v1/study-abroad/programs-public/?country=1&program_type=1'
+    ```
+
+    Response:
+    ```json
+    {
+      "count": 25,
+      "next": "https://api.ibtiaath.com/api/v1/study-abroad/programs-public/?page=2",
+      "results": [
+        {
+          "id": 1,
+          "title": "Computer Science",
+          "university": { "id": 1, "name": "Istanbul University" },
+          "country": { "id": 1, "name": "Turkey" },
+          "yearly_cost": "5000.00",
+          "duration": { "value": "4 years" }
+        }
+      ]
+    }
+    ```
+  </Step>
+
+  <Step title="Check eligibility (optional but recommended)">
+    Saves the user from a rejected application down the line.
+
+    ```http
+    POST /api/v1/study-abroad/applications/check_eligibility/
+    Authorization: Bearer <access-token>
+    ```
+
+    Body:
+    ```json
+    { "program": 1 }
+    ```
+  </Step>
+
+  <Step title="Create a draft application">
+    ```http
+    POST /api/v1/study-abroad/applications/
+    Authorization: Bearer <access-token>
+    ```
+
+    <ParamField path="program" type="integer" required>
+      The program ID from step 1.
+    </ParamField>
+
+    <ParamField path="applicant_data" type="object" required>
+      Passport and emergency contact info.
+
+      <Expandable title="applicant_data fields">
+        <ParamField path="passport_number" type="string" required />
+        <ParamField path="passport_expiry" type="string" required>
+          ISO date — `2028-05-15`. Must be at least 6 months in the future.
+        </ParamField>
+        <ParamField path="emergency_contact" type="string" required>
+          Phone number, Iraqi format: `+9647801234567`.
+        </ParamField>
+      </Expandable>
+    </ParamField>
+
+    Response:
+    ```json
+    {
+      "id": 100,
+      "reference_number": "APP-2024-000100",
+      "program": { "id": 1, "title": "Computer Science" },
+      "status": "draft",
+      "amount_due": "25000.00",
+      "missing_documents": ["passport_scan", "transcripts", "photo"]
+    }
+    ```
+  </Step>
+
+  <Step title="Upload required documents">
+    Each document type goes in a separate request. Use `multipart/form-data`.
+
+    ```bash
+    curl -X POST 'https://api.ibtiaath.com/api/v1/study-abroad/applications/100/upload_document/' \
+      -H 'Authorization: Bearer eyJ...' \
+      -F 'document_type=passport_scan' \
+      -F 'file=@/path/to/passport.pdf'
+    ```
+
+    <Callout type="note">
+      Allowed types: PDF, JPEG, PNG. Max size 10 MB per file. Use the `missing_documents` array from step 3 to know what's still needed.
+    </Callout>
+  </Step>
+
+  <Step title="Submit the application">
+    Locks the application and starts the review.
+
+    ```http
+    POST /api/v1/study-abroad/applications/100/submit/
+    Authorization: Bearer <access-token>
+    ```
+
+    The status changes from `draft` → `submitted`.
+  </Step>
+
+  <Step title="Pay the application fee from the wallet">
+    ```http
+    POST /api/v1/study-abroad/applications/100/process_payment/
+    Authorization: Bearer <access-token>
+    ```
+
+    The user's balance must be ≥ `amount_due`. If not:
+
+    ```json
+    { "detail": "Insufficient balance. Your balance is 5,000 IQD but 25,000 IQD is required." }
+    ```
+
+    Top up via [gift code](/guides/redeem-gift-code) or [Wayl payment](/guides/wayl-deposit) and retry.
+  </Step>
+</Steps>
+
+## Application states
+
+| State | Meaning |
+|---|---|
+| `draft` | Created but not submitted. Documents can still be uploaded. |
+| `submitted` | Locked. Awaiting admin review. |
+| `payment_required` | Approved in principle; needs payment to proceed. |
+| `paid` | Fee received. Application is being processed by the partner. |
+| `approved` | Final acceptance from the university. |
+| `rejected` | Final rejection. Reason is in `rejection_reason`. |
+
+## Track status
+
+```http
+GET /api/v1/study-abroad/applications/100/
+```
+
+For history (every status change):
+
+```http
+GET /api/v1/study-abroad/applications/100/history/
+```
+
+## Related
+
+<Cards>
+  <Card title="Redeem a gift code" href="/guides/redeem-gift-code" icon="gift">
+    Top up before paying the application fee.
+  </Card>
+  <Card title="Wayl deposit" href="/guides/wayl-deposit" icon="credit-card">
+    Pay from a Visa or Mastercard.
+  </Card>
+</Cards>

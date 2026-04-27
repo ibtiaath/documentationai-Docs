@@ -1,0 +1,74 @@
+---
+title: Rate limits
+description: Throttle scopes, default limits, and how to handle 429 responses.
+---
+
+The API throttles requests per IP (anonymous) and per user (authenticated). When you exceed a limit, you receive a 429 with a `Retry-After` header.
+
+## Default limits
+
+| Scope | Limit |
+|---|---|
+| Anonymous (per IP) | 100 requests / hour |
+| Authenticated user | 1,000 requests / hour |
+| Auth endpoints (register, login, OTP) | 10 requests / hour per IP |
+| Password reset | 5 requests / hour per email |
+| OTP resend | 1 request / 15 seconds per email |
+
+<Callout type="note">
+  These are defaults. Specific endpoints may have stricter limits — they're documented on the endpoint's reference page.
+</Callout>
+
+## 429 response
+
+```json
+{ "detail": "Request was throttled. Expected available in 60 seconds." }
+```
+
+Response headers:
+
+```http
+Retry-After: 60
+X-RateLimit-Remaining: 0
+```
+
+## How to handle it
+
+<Steps>
+  <Step title="Read Retry-After">
+    The `Retry-After` header tells you how many seconds until the next request is allowed.
+  </Step>
+  <Step title="Wait, then retry">
+    Use exponential backoff if you hit the same limit twice in a row.
+  </Step>
+  <Step title="Cache aggressively">
+    Lists like countries, programs, and banners change rarely. Cache them client-side.
+  </Step>
+</Steps>
+
+## Reference implementation
+
+```ts
+async function withRateLimit<T>(fn: () => Promise<T>, attempts = 3): Promise<T> {
+  for (let i = 0; i < attempts; i++) {
+    try {
+      return await fn();
+    } catch (err: any) {
+      if (err.status !== 429 || i === attempts - 1) throw err;
+      const wait = Number(err.headers?.['retry-after'] ?? 60) * 1000;
+      await new Promise((r) => setTimeout(r, wait * (i + 1)));
+    }
+  }
+  throw new Error('unreachable');
+}
+```
+
+## Increasing your limit
+
+If you're building a high-volume integration (analytics ingestion, bulk operations), email [support@ibtiaath.com](mailto:support@ibtiaath.com) with:
+
+- Your account email
+- Estimated requests per hour
+- Use case
+
+The team will whitelist your IP or raise the per-user cap.

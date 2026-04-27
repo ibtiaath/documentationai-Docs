@@ -1,0 +1,81 @@
+---
+title: Use with AI
+description: Connect Cursor, Claude Code, ChatGPT, and other AI tools to these docs via the MCP server.
+---
+
+These docs expose an **MCP server** that AI coding tools can query. Once connected, the AI can search the EBTE3ATH docs and return grounded, cited answers — same ranking as the in-page "Ask AI" widget.
+
+## What you get
+
+- The AI sees the latest docs every time, no stale training data.
+- Answers cite the exact page and section.
+- Works in Cursor, Claude Code, Windsurf, ChatGPT (with MCP), Copilot, and any other MCP-compatible client.
+
+## Endpoint
+
+```
+https://docs.ibtiaath.com/_mcp
+```
+
+The server exposes one tool: `searchDocumentation` (read-only).
+
+<Callout type="note">
+  Only public docs are searchable by default. To include private/internal pages, contact [support@ibtiaath.com](mailto:support@ibtiaath.com).
+</Callout>
+
+## Connect
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```bash
+    claude mcp add ebteath-docs https://docs.ibtiaath.com/_mcp
+    ```
+
+    Then ask Claude Code things like:
+
+    > "How do I redeem a gift code in EBTE3ATH? Show me a curl example."
+  </Tab>
+
+  <Tab title="Cursor">
+    Open `~/.cursor/mcp.json` and add:
+
+    ```json
+    {
+      "mcpServers": {
+        "ebteath-docs": {
+          "url": "https://docs.ibtiaath.com/_mcp"
+        }
+      }
+    }
+    ```
+
+    Restart Cursor. The docs are now available in chat and inline edits.
+  </Tab>
+
+  <Tab title="ChatGPT (Custom Connector)">
+    Settings → Connectors → Add custom connector:
+
+    - **Name**: EBTE3ATH Docs
+    - **URL**: `https://docs.ibtiaath.com/_mcp`
+    - **Auth**: None (public docs)
+
+    Enable it in any chat to get grounded answers.
+  </Tab>
+
+  <Tab title="Windsurf / Continue / other">
+    Any MCP-compatible client takes the same URL: `https://docs.ibtiaath.com/_mcp`. Refer to your tool's MCP setup docs.
+  </Tab>
+</Tabs>
+
+## llms.txt
+
+The site also exposes an [`llms.txt`](https://docs.ibtiaath.com/llms.txt) at the root, which non-MCP AI tools (Perplexity, Phind, others) use to index the docs. No setup required.
+
+## Example prompts
+
+Once connected, try:
+
+- *"Show me the JWT refresh flow with axios interceptor."*
+- *"What error does the API return when a gift code is already redeemed?"*
+- *"How do I search for flights from Baghdad to Istanbul on May 15?"*
+- *"What's the rate limit on /users/register/?"*

@@ -1,0 +1,173 @@
+---
+title: Order a document translation
+description: Submit a certified translation order, upload the source document, and pay.
+---
+
+The translations API accepts certified document translation orders. The user picks the document type, source/target language, and delivery city; uploads the original; and pays. The translation team handles the rest.
+
+## The flow
+
+<Mermaid>
+sequenceDiagram
+    Client->>API: GET /translations/document-types/list_active/
+    API-->>Client: types (passport, transcript, ...)
+    Client->>API: GET /translations/delivery-cities/active_cities/
+    API-->>Client: cities + delivery fees
+    Client->>API: POST /translations/orders/
+    API-->>Client: 201, order with final price
+    Client->>API: POST /orders/{id}/upload-document/
+    API-->>Client: 200, attached
+    Client->>API: POST /orders/{id}/pay/
+    API-->>Client: 200, status: paid
+</Mermaid>
+
+## Steps
+
+<Steps>
+  <Step title="List active document types">
+    ```http
+    GET /api/v1/translations/document-types/list_active/
+    ```
+
+    Response:
+    ```json
+    {
+      "results": [
+        {
+          "id": 1,
+          "name": "Passport",
+          "name_ar": "جواز السفر",
+          "base_price": "15000.00",
+          "stamp_required": true
+        },
+        {
+          "id": 2,
+          "name": "University transcript",
+          "base_price": "30000.00",
+          "stamp_required": true
+        }
+      ]
+    }
+    ```
+  </Step>
+
+  <Step title="List delivery cities">
+    ```http
+    GET /api/v1/translations/delivery-cities/active_cities/
+    ```
+
+    Response:
+    ```json
+    {
+      "results": [
+        { "id": 1, "name": "Baghdad", "delivery_fee": "5000.00" },
+        { "id": 2, "name": "Erbil", "delivery_fee": "8000.00" }
+      ]
+    }
+    ```
+  </Step>
+
+  <Step title="Create the order">
+    ```http
+    POST /api/v1/translations/orders/
+    Authorization: Bearer <access-token>
+    ```
+
+    <ParamField path="document_type" type="integer" required />
+    <ParamField path="source_language" type="string" required>
+      ISO 639-1 code: `ar`, `en`, `tr`.
+    </ParamField>
+    <ParamField path="target_language" type="string" required />
+    <ParamField path="copies" type="integer" default="1">
+      Number of certified copies.
+    </ParamField>
+    <ParamField path="include_stamp" type="boolean" default="true">
+      Apply the official translator stamp.
+    </ParamField>
+    <ParamField path="delivery_city" type="integer" required />
+    <ParamField path="delivery_address" type="string" required />
+    <ParamField path="recipient_name" type="string" required />
+    <ParamField path="recipient_phone" type="string" required />
+
+    Response:
+    ```json
+    {
+      "id": 501,
+      "reference_number": "TR-2026-000501",
+      "status": "draft",
+      "subtotal": "30000.00",
+      "stamp_fee": "2000.00",
+      "delivery_fee": "5000.00",
+      "final_total_price": "37000.00",
+      "currency": "IQD"
+    }
+    ```
+
+    <Callout type="note">
+      `final_total_price` is the field to display to the user — it includes stamp + delivery fees on top of the document base price.
+    </Callout>
+  </Step>
+
+  <Step title="Upload the source document">
+    ```bash
+    curl -X POST 'https://api.ibtiaath.com/api/v1/translations/orders/501/upload-document/' \
+      -H 'Authorization: Bearer eyJ...' \
+      -F 'file=@/path/to/passport-scan.pdf'
+    ```
+
+    PDF, JPEG, PNG. Max 10 MB.
+  </Step>
+
+  <Step title="Pay">
+    From the wallet:
+
+    ```http
+    POST /api/v1/translations/orders/501/pay/
+    ```
+
+    Or via Wayl:
+
+    ```http
+    POST /api/v1/payments/wayl/translation/
+    ```
+
+    Body: `{ "order_id": 501, "card_type": "local" }`. Returns a `payment_link_url` — see the [Wayl guide](/guides/wayl-deposit).
+  </Step>
+
+  <Step title="Track the order">
+    ```http
+    GET /api/v1/translations/orders/501/
+    ```
+
+    Status flow: `draft` → `paid` → `in_progress` → `ready` → `out_for_delivery` → `delivered`.
+  </Step>
+</Steps>
+
+## Pricing breakdown
+
+The `final_total_price` field on the order is the source of truth for what to display:
+
+```
+final_total_price = (base_price × copies) + stamp_fee + delivery_fee + printing_fee
+```
+
+Don't compute this on the client — server-side rules (promotions, account discounts) can change the result.
+
+## Cancel
+
+```http
+POST /api/v1/translations/orders/501/cancel/
+```
+
+Allowed only while status is `draft` or `paid`. Once `in_progress`, contact support.
+
+## Related
+
+<Cards>
+  <Card title="Wayl deposit" href="/guides/wayl-deposit" icon="credit-card">
+    Pay for the translation directly with a card.
+  </Card>
+  <Card title="Errors" href="/errors" icon="circle-alert">
+    Validation and payment errors.
+  </Card>
+</Cards>

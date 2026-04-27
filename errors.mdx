@@ -1,0 +1,220 @@
+---
+title: Errors
+description: HTTP status codes, error response shapes, and how to handle them in client code.
+---
+
+The API uses standard HTTP status codes and returns errors as JSON. Every error response has a predictable shape — handle them by status code and by field.
+
+## Status codes
+
+<Tabs>
+  <Tab title="Success">
+    | Code | Meaning |
+    |---|---|
+    | 200 | OK — GET / PUT / PATCH succeeded |
+    | 201 | Created — POST created a resource |
+    | 204 | No Content — DELETE succeeded |
+  </Tab>
+  <Tab title="Client errors">
+    | Code | Meaning | What to do |
+    |---|---|---|
+    | 400 | Validation failed | Show field errors to the user |
+    | 401 | Auth missing or invalid | Refresh the token, then retry |
+    | 403 | Insufficient permission | Show "access denied" |
+    | 404 | Resource not found | Show a not-found view |
+    | 409 | State conflict | Re-fetch the resource and retry |
+    | 415 | Wrong Content-Type | Use `application/json` |
+    | 429 | Rate limit hit | Wait `Retry-After` seconds |
+  </Tab>
+  <Tab title="Server errors">
+    | Code | Meaning | What to do |
+    |---|---|---|
+    | 500 | Server bug | Retry with backoff; report to support |
+    | 502 | Upstream provider failed (e.g. Duffel, Airalo) | Retry |
+    | 503 | Service unavailable / maintenance | Retry with backoff |
+  </Tab>
+</Tabs>
+
+## Response shapes
+
+The error body always falls into one of three shapes.
+
+### 1. Single message
+
+```json
+{ "detail": "Authentication credentials were not provided." }
+```
+
+Used for 401, 403, 404, 429, and most business-logic errors.
+
+### 2. Field-level validation (400)
+
+```json
+{
+  "email": ["Enter a valid email address."],
+  "password": ["Ensure this field has at least 8 characters."],
+  "non_field_errors": ["User with this email already exists."]
+}
+```
+
+Each key is a field name; each value is an array of strings. `non_field_errors` is for errors that don't belong to a specific field.
+
+### 3. Token errors (401)
+
+```json
+{
+  "detail": "Given token not valid for any token type",
+  "code": "token_not_valid",
+  "messages": [
+    {
+      "token_class": "AccessToken",
+      "token_type": "access",
+      "message": "Token is invalid or expired"
+    }
+  ]
+}
+```
+
+Distinguish by `code`:
+
+- `token_not_valid` + `messages[0].message == "Token is invalid or expired"` → refresh and retry.
+- `token_not_valid` + body says "blacklisted" → user must log in again.
+
+## Common scenarios
+
+<Expandable title="401 — token expired">
+```json
+{
+  "detail": "Given token not valid for any token type",
+  "code": "token_not_valid"
+}
+```
+**Handle:** call `/auth/refresh/`, then retry the original request once.
+</Expandable>
+
+<Expandable title="403 — token blacklisted">
+```json
+{ "detail": "Token is blacklisted", "code": "token_not_valid" }
+```
+**Handle:** clear local tokens, send the user to login.
+</Expandable>
+
+<Expandable title="400 — validation">
+```json
+{
+  "phone_number": ["Enter a valid phone number."],
+  "date_of_birth": ["Date has wrong format. Use YYYY-MM-DD."]
+}
+```
+**Handle:** map each field to its form input and display the first error.
+</Expandable>
+
+<Expandable title="429 — rate limited">
+```json
+{ "detail": "Request was throttled. Expected available in 60 seconds." }
+```
+Headers include `Retry-After: 60`.
+
+**Handle:** wait that many seconds, then retry. See [Rate limits](/rate-limits).
+</Expandable>
+
+<Expandable title="400 — insufficient balance">
+```json
+{ "detail": "Insufficient balance. Your balance is 5,000 IQD but 10,000 IQD is required." }
+```
+**Handle:** prompt the user to top up — link to gift code redemption or Wayl payment.
+</Expandable>
+
+<Expandable title="400 — gift code already redeemed">
+```json
+{ "detail": "Gift code has already been redeemed." }
+```
+Other gift code messages: `Gift code has expired.`, `Gift card redemption is blocked for this account. Please contact support.`
+</Expandable>
+
+<Expandable title="400 — OTP errors">
+```json
+{ "detail": "Invalid OTP code." }
+{ "detail": "OTP has expired. Please request a new one." }
+{ "detail": "Maximum OTP attempts exceeded. Please request a new code." }
+```
+**Handle:** show the message; offer resend after 15 seconds.
+</Expandable>
+
+## Reference implementations
+
+<Tabs>
+  <Tab title="JavaScript / TypeScript">
+    ```ts
+    class APIError extends Error {
+      constructor(public status: number, public body: any) {
+        super(body?.detail ?? 'API error');
+      }
+    }
+
+    async function call<T>(url: string, init: RequestInit = {}): Promise<T> {
+      const r = await fetch(url, {
+        ...init,
+        headers: { 'Content-Type': 'application/json', ...init.headers },
+      });
+      if (r.ok) return r.json() as Promise<T>;
+
+      const body = await r.json().catch(() => ({}));
+
+      if (r.status === 401 && body.code === 'token_not_valid') {
+        await refreshToken();
+        return call<T>(url, init); // retry once
+      }
+      if (r.status === 429) {
+        const wait = Number(r.headers.get('Retry-After') ?? 60);
+        await new Promise((res) => setTimeout(res, wait * 1000));
+        return call<T>(url, init);
+      }
+      throw new APIError(r.status, body);
+    }
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    import time
+    import requests
+
+    class APIError(Exception):
+        def __init__(self, status, body):
+            self.status = status
+            self.body = body
+            super().__init__(body.get("detail", "API error"))
+
+    def call(method, url, *, headers=None, json=None):
+        r = requests.request(method, url, headers=headers, json=json)
+        if r.ok:
+            return r.json()
+
+        body = r.json() if r.content else {}
+
+        if r.status_code == 401 and body.get("code") == "token_not_valid":
+            refresh_token()
+            return call(method, url, headers=headers, json=json)
+        if r.status_code == 429:
+            time.sleep(int(r.headers.get("Retry-After", 60)))
+            return call(method, url, headers=headers, json=json)
+
+        raise APIError(r.status_code, body)
+    ```
+  </Tab>
+</Tabs>
+
+## Display guidelines
+
+| Error class | UI |
+|---|---|
+| 400 (validation) | Inline field errors |
+| 401 | Silent refresh, fallback to login |
+| 403 | "You don't have access to this." |
+| 404 | "Not found" page or empty state |
+| 429 | Toast: "Too many requests. Try again in N seconds." |
+| 5xx | Toast: "Something went wrong. Please try again." + retry button |
+
+## Reporting errors
+
+Server errors are tracked in Sentry. When opening a support ticket, include the `X-Request-Id` response header — it lets the team find the trace immediately.
