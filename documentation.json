@@ -13,17 +13,6 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Documentation",
-        "groups": [
-          {
-            "group": "Get started",
-            "pages": [
-              "overview"
-            ]
-          }
-        ]
-      },
-      {
         "tab": "API Reference",
         "icon": "code",
         "groups": [
