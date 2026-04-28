@@ -3,7 +3,7 @@ title: Top up with Wayl (Visa/Mastercard)
 description: Add wallet balance using the Wayl payment gateway from a card.
 ---
 
-Wayl is the EBTE3ATH payment gateway for Iraq. Users top up their wallet by entering their card details on a hosted Wayl checkout page; on success, the balance is credited automatically.
+Wayl is the Ibtiaath payment gateway for Iraq. Users top up their wallet by entering their card details on a hosted Wayl checkout page; on success, the balance is credited automatically.
 
 <Callout type="note">
   Commission: **2.5% + 600 IQD** for local cards, **3.5% + 600 IQD** for international cards. These are added on top of the deposit amount and shown to the user before they confirm.
@@ -155,7 +155,7 @@ Each takes the resource ID and creates a payment link bound to that resource. On
 
 ## Webhook security
 
-EBTE3ATH receives Wayl webhooks at `/api/v1/payments/webhooks/wayl/`:
+Ibtiaath receives Wayl webhooks at `/api/v1/payments/webhooks/wayl/`:
 
 - **Per-payment-link secrets** — each link has its own HMAC secret (not a global one).
 - **Replay protection** — the `WebhookEvent` model dedupes by event ID.

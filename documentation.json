@@ -1,7 +1,7 @@
 {
   "name": "ibtiaath API",
   "title": "ibtiaath API",
-  "description": "internal docs",
+  "description": "Documentation for the Ibtiaath API",
   "colors": {
     "light": {
       "brand": "#F97316"
@@ -12,6 +12,38 @@
   },
   "navigation": {
     "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "overview",
+              "quickstart",
+              "use-with-ai"
+            ]
+          },
+          {
+            "group": "Core concepts",
+            "pages": [
+              "authentication",
+              "errors",
+              "rate-limits"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/apply-program",
+              "guides/book-flight",
+              "guides/buy-esim",
+              "guides/order-translation",
+              "guides/redeem-gift-code",
+              "guides/wayl-deposit"
+            ]
+          }
+        ]
+      },
       {
         "tab": "API Reference",
         "icon": "code",
