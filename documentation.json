@@ -1,50 +1,17 @@
 {
   "name": "Ibtiaath",
   "title": "Ibtiaath API",
-  "description": "REST API for study abroad, flights, eSIM, translations, and wallet operations",
+  "description": "internal docs",
   "colors": {
     "light": {
-      "brand": "#0F766E"
+      "brand": "#F97316"
     },
     "dark": {
-      "brand": "#5EEAD4"
+      "brand": "#FDBA74"
     }
   },
   "navigation": {
     "tabs": [
-      {
-        "tab": "Documentation",
-        "icon": "book",
-        "groups": [
-          {
-            "group": "Get started",
-            "pages": [
-              "overview",
-              "quickstart",
-              "use-with-ai"
-            ]
-          },
-          {
-            "group": "Core concepts",
-            "pages": [
-              "authentication",
-              "errors",
-              "rate-limits"
-            ]
-          },
-          {
-            "group": "Guides",
-            "pages": [
-              "guides/apply-program",
-              "guides/book-flight",
-              "guides/buy-esim",
-              "guides/order-translation",
-              "guides/redeem-gift-code",
-              "guides/wayl-deposit"
-            ]
-          }
-        ]
-      },
       {
         "tab": "API Reference",
         "icon": "code",
