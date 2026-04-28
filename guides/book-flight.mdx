@@ -1,0 +1,326 @@
+---
+title: Book a flight
+description: 'Search flights, select an offer, add passengers, and pay from the wallet.'
+---
+\## The flow
+
+\<Mermaid>
+
+sequenceDiagram
+
+&#x20;   Client->>API: POST /flights/search/
+
+&#x20;   API-->>Client: search\_id + offers
+
+&#x20;   Client->>API: GET /flights/offers/\{offer\_id}/
+
+&#x20;   API-->>Client: offer details + final price
+
+&#x20;   Client->>API: POST /flights/bookings/
+
+&#x20;   API-->>Client: 201, booking (status: pending)
+
+&#x20;   Client->>API: POST /bookings/\{ref}/passengers/
+
+&#x20;   API-->>Client: 200, passengers attached
+
+&#x20;   Client->>API: POST /bookings/\{ref}/pay/wallet/
+
+&#x20;   API-->>Client: 200, status: confirmed, ticket issued
+
+\</Mermaid>
+
+\## Steps
+
+\<Steps>
+
+&#x20; \<Step title="Search flights">
+
+&#x20;   \`\`\`http
+
+&#x20;   POST /api/v1/flights/search/
+
+&#x20;   Authorization: Bearer \<access-token>
+
+&#x20;   \`\`\`
+
+&#x20;   \<ParamField path="origin" type="string" required>
+
+&#x20;     IATA airport code: `BGW` (Baghdad).
+
+&#x20;   \</ParamField>
+
+&#x20;   \<ParamField path="destination" type="string" required>
+
+&#x20;     IATA airport code: `IST` (Istanbul).
+
+&#x20;   \</ParamField>
+
+&#x20;   \<ParamField path="departure\_date" type="string" required>
+
+&#x20;     ISO date: `2026-05-15`.
+
+&#x20;   \</ParamField>
+
+&#x20;   \<ParamField path="return\_date" type="string">
+
+&#x20;     Omit for one-way.
+
+&#x20;   \</ParamField>
+
+&#x20;   \<ParamField path="passengers" type="object" required>
+
+&#x20;     `{ "adults": 1, "children": 0, "infants": 0 }`
+
+&#x20;   \</ParamField>
+
+&#x20;   \<ParamField path="cabin\_class" type="string" default="economy">
+
+&#x20;     One of: `economy`, `premium_economy`, `business`, `first`.
+
+&#x20;   \</ParamField>
+
+&#x20;   Response:
+
+&#x20;   \`\`\`json
+
+&#x20;   \{
+
+&#x20;     "search\_id": "srch\_01HXYZ...",
+
+&#x20;     "offers": \[
+
+&#x20;       \{
+
+&#x20;         "id": "off\_01HXYZ...",
+
+&#x20;         "airline": \{ "name": "Turkish Airlines", "iata": "TK" },
+
+&#x20;         "price": "450000.00",
+
+&#x20;         "currency": "IQD",
+
+&#x20;         "duration": "PT3H45M",
+
+&#x20;         "segments": \[ /\* ... \*/ ]
+
+&#x20;       }
+
+&#x20;     ]
+
+&#x20;   }
+
+&#x20;   \`\`\`
+
+&#x20; \</Step>
+
+&#x20; \<Step title="Get the full offer (price may shift)">
+
+&#x20;   Duffel offers are time-limited and prices can refresh on selection.
+
+&#x20;   \`\`\`http
+
+&#x20;   GET /api/v1/flights/offers/off\_01HXYZ.../
+
+&#x20;   \`\`\`
+
+&#x20;   Use `price` from this response, not the search response.
+
+&#x20; \</Step>
+
+&#x20; \<Step title="Create the booking">
+
+&#x20;   \`\`\`http
+
+&#x20;   POST /api/v1/flights/bookings/
+
+&#x20;   \`\`\`
+
+&#x20;   Body:
+
+&#x20;   \`\`\`json
+
+&#x20;   \{ "offer\_id": "off\_01HXYZ..." }
+
+&#x20;   \`\`\`
+
+&#x20;   Response:
+
+&#x20;   \`\`\`json
+
+&#x20;   \{
+
+&#x20;     "booking\_reference": "BK-2026-000042",
+
+&#x20;     "status": "pending",
+
+&#x20;     "total\_amount": "450000.00",
+
+&#x20;     "service\_fee": "5000.00",
+
+&#x20;     "currency": "IQD"
+
+&#x20;   }
+
+&#x20;   \`\`\`
+
+&#x20; \</Step>
+
+&#x20; \<Step title="Attach passengers">
+
+&#x20;   \`\`\`http
+
+&#x20;   POST /api/v1/flights/bookings/BK-2026-000042/passengers/
+
+&#x20;   \`\`\`
+
+&#x20;   Body:
+
+&#x20;   \`\`\`json
+
+&#x20;   \{
+
+&#x20;     "passengers": \[
+
+&#x20;       \{
+
+&#x20;         "type": "adult",
+
+&#x20;         "title": "mr",
+
+&#x20;         "given\_name": "Mohammed",
+
+&#x20;         "family\_name": "Ahmed",
+
+&#x20;         "born\_on": "1995-06-15",
+
+&#x20;         "gender": "m",
+
+&#x20;         "email": "<a href="mailto:user@example.com" target="_blank" rel="noopener noreferrer">user\@example.com</a>",
+
+&#x20;         "phone\_number": "+9647801234567",
+
+&#x20;         "passport\_number": "A12345678",
+
+&#x20;         "passport\_expiry": "2028-05-15",
+
+&#x20;         "passport\_country": "IQ"
+
+&#x20;       }
+
+&#x20;     ]
+
+&#x20;   }
+
+&#x20;   \`\`\`
+
+&#x20; \</Step>
+
+&#x20; \<Step title="Check payment eligibility">
+
+&#x20;   Confirms the offer is still available and the price hasn't changed.
+
+&#x20;   \`\`\`http
+
+&#x20;   GET /api/v1/flights/bookings/BK-2026-000042/payment-eligibility/
+
+&#x20;   \`\`\`
+
+&#x20; \</Step>
+
+&#x20; \<Step title="Pay from the wallet">
+
+&#x20;   \`\`\`http
+
+&#x20;   POST /api/v1/flights/bookings/BK-2026-000042/pay/wallet/
+
+&#x20;   \`\`\`
+
+&#x20;   Returns `status: confirmed` and a Duffel-issued ticket. To download the e-ticket:
+
+&#x20;   \`\`\`http
+
+&#x20;   GET /api/v1/flights/bookings/BK-2026-000042/ticket/
+
+&#x20;   \`\`\`
+
+&#x20; \</Step>
+
+\</Steps>
+
+\## Cancel a booking
+
+\`\`\`http
+
+POST /api/v1/flights/bookings/BK-2026-000042/cancel/
+
+\`\`\`
+
+Refund eligibility depends on Duffel's rules for the specific fare. The response includes the refund amount and where it's credited (wallet or original payment method).
+
+\## Service fee
+
+EBTE3ATH adds a fixed service fee on top of Duffel's price. To preview it before booking:
+
+\`\`\`http
+
+GET /api/v1/flights/service-fee/?amount=450000
+
+\`\`\`
+
+\## Errors specific to flights
+
+\<Expandable title="Flight-specific errors">
+
+&#x20; **Offer expired**
+
+&#x20; \`\`\`json
+
+&#x20; \{ "detail": "Offer is no longer available. Search again." }
+
+&#x20; \`\`\`
+
+&#x20; **Price changed**
+
+&#x20; \`\`\`json
+
+&#x20; \{ "detail": "Offer price has changed. Re-fetch the offer to confirm." }
+
+&#x20; \`\`\`
+
+&#x20; **Passport expiring too soon**
+
+&#x20; \`\`\`json
+
+&#x20; \{ "passport\_expiry": \["Passport must be valid for at least 6 months from departure."] }
+
+&#x20; \`\`\`
+
+&#x20; **Insufficient wallet**
+
+&#x20; \`\`\`json
+
+&#x20; \{ "detail": "Insufficient balance. Your balance is 100,000 IQD but 455,000 IQD is required." }
+
+&#x20; \`\`\`
+
+\</Expandable>
+
+\## Related
+
+\<Cards>
+
+&#x20; \<Card title="Wayl payment" href="/guides/wayl-deposit" icon="credit-card">
+
+&#x20;   Top up the wallet before paying for the flight.
+
+&#x20; \</Card>
+
+&#x20; \<Card title="Airports lookup" href="/api-reference/flights/airports" icon="search">
+
+&#x20;   Find the right IATA codes by city or country.
+
+&#x20; \</Card>
+
+\</Cards>
+
