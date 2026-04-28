@@ -13,15 +13,6 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Documentation",
-        "groups": [
-          {
-            "group": "Get started",
-            "pages": ["overview"]
-          }
-        ]
-      },
-      {
         "tab": "API Reference",
         "icon": "code",
         "groups": [
@@ -30,6 +21,38 @@
             "pages": [],
             "icon": "a-arrow-down",
             "openapi": "api-reference/openapi.yaml"
+          }
+        ]
+      },
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "overview",
+              "quickstart",
+              "use-with-ai"
+            ]
+          },
+          {
+            "group": "Core concepts",
+            "pages": [
+              "authentication",
+              "errors",
+              "rate-limits"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/apply-program",
+              "guides/book-flight",
+              "guides/buy-esim",
+              "guides/order-translation",
+              "guides/redeem-gift-code",
+              "guides/wayl-deposit"
+            ]
           }
         ]
       }
