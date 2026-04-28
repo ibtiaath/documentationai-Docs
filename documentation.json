@@ -13,15 +13,6 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Documentation",
-        "groups": [
-          {
-            "group": "Get started",
-            "pages": ["overview"]
-          }
-        ]
-      },
-      {
         "tab": "API Reference",
         "icon": "code",
         "groups": [
@@ -29,7 +20,7 @@
             "group": "api",
             "pages": [],
             "icon": "a-arrow-down",
-            "openapi": "api-reference/openapi"
+            "openapi": "api-reference/openapi.yaml"
           }
         ]
       }
