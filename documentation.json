@@ -3,11 +3,26 @@
   "title": "ibtiaath API",
   "description": "internal docs",
   "colors": {
-    "light": { "brand": "#F97316" },
-    "dark": { "brand": "#FDBA74" }
+    "light": {
+      "brand": "#F97316"
+    },
+    "dark": {
+      "brand": "#FDBA74"
+    }
   },
   "navigation": {
     "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "overview"
+            ]
+          }
+        ]
+      },
       {
         "tab": "API Reference",
         "icon": "code",
