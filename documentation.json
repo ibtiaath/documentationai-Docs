@@ -26,8 +26,6 @@
       },
       {
         "tab": "Documentation",
-        "icon": "book",
-        "path": "overview",
         "groups": [
           {
             "group": "Get started",
