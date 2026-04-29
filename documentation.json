@@ -23,15 +23,6 @@
             "openapi": "api-reference/openapi.yaml"
           }
         ]
-      },
-      {
-        "tab": "Documentation",
-        "groups": [
-          {
-            "group": "Get started",
-            "pages": ["overview"]
-          }
-        ]
       }
     ]
   }
