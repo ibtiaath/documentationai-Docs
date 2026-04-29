@@ -7,19 +7,24 @@ This guide walks through the full study-abroad application flow: discover progra
 
 ## The flow
 
-<Mermaid>
-sequenceDiagram
-    Client->>API: GET /study-abroad/programs-public/
-    API-->>Client: list of programs
-    Client->>API: POST /study-abroad/applications/
-    API-->>Client: 201, draft application
-    Client->>API: POST /applications/{id}/upload_document/
-    API-->>Client: 200, doc attached
-    Client->>API: POST /applications/{id}/submit/
-    API-->>Client: 200, status: submitted
-    Client->>API: POST /applications/{id}/process_payment/
-    API-->>Client: 200, status: paid
-</Mermaid>
+<Callout kind="info">
+  Flow: browse public programs, create a draft application, upload documents, submit, then pay the fee.
+</Callout>
+
+<Steps>
+  <Step title="Browse programs">
+    GET `/study-abroad/programs-public/` to list public programs.
+  </Step>
+  <Step title="Create a draft application">
+    POST `/study-abroad/applications/` with the selected program and applicant details.
+  </Step>
+  <Step title="Upload documents">
+    Attach the required documents one by one with `multipart/form-data`.
+  </Step>
+  <Step title="Submit and pay">
+    Submit the application, then pay the fee from the wallet once it is ready.
+  </Step>
+</Steps>
 
 ## Steps
 
@@ -168,11 +173,11 @@ GET /api/v1/study-abroad/applications/100/history/
 
 ## Related
 
-<Cards>
+<Columns cols="2">
   <Card title="Redeem a gift code" href="/guides/redeem-gift-code" icon="gift">
     Top up before paying the application fee.
   </Card>
   <Card title="Wayl deposit" href="/guides/wayl-deposit" icon="credit-card">
     Pay from a Visa or Mastercard.
   </Card>
-</Cards>
+</Columns>
