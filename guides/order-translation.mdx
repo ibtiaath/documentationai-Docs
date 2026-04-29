@@ -3,23 +3,24 @@ title: Order a document translation
 description: Submit a certified translation order, upload the source document, and pay.
 ---
 
-The translations API accepts certified document translation orders. The user picks the document type, source/target language, and delivery city; uploads the original; and pays. The translation team handles the rest.
+The translations API accepts certified document translation orders. The user picks the document type, source and target language, and delivery city; uploads the original; and pays. The translation team handles the rest.
 
 ## The flow
 
-<Mermaid>
-sequenceDiagram
-    Client->>API: GET /translations/document-types/list_active/
-    API-->>Client: types (passport, transcript, ...)
-    Client->>API: GET /translations/delivery-cities/active_cities/
-    API-->>Client: cities + delivery fees
-    Client->>API: POST /translations/orders/
-    API-->>Client: 201, order with final price
-    Client->>API: POST /orders/{id}/upload-document/
-    API-->>Client: 200, attached
-    Client->>API: POST /orders/{id}/pay/
-    API-->>Client: 200, status: paid
-</Mermaid>
+<Steps>
+  <Step title="List the available options">
+    Fetch active document types and delivery cities before creating the order.
+  </Step>
+  <Step title="Create the order">
+    POST `/api/v1/translations/orders/` with the chosen document, languages, and delivery details.
+  </Step>
+  <Step title="Upload the source document">
+    Attach the PDF or image after the order is created.
+  </Step>
+  <Step title="Pay and track progress">
+    Pay from the wallet or Wayl, then follow the order status until delivery.
+  </Step>
+</Steps>
 
 ## Steps
 
@@ -103,7 +104,7 @@ sequenceDiagram
     }
     ```
 
-    <Callout type="note">
+    <Callout kind="note">
       `final_total_price` is the field to display to the user — it includes stamp + delivery fees on top of the document base price.
     </Callout>
   </Step>
@@ -163,11 +164,11 @@ Allowed only while status is `draft` or `paid`. Once `in_progress`, contact supp
 
 ## Related
 
-<Cards>
+<Columns cols={2}>
   <Card title="Wayl deposit" href="/guides/wayl-deposit" icon="credit-card">
     Pay for the translation directly with a card.
   </Card>
   <Card title="Errors" href="/errors" icon="circle-alert">
     Validation and payment errors.
   </Card>
-</Cards>
+</Columns>

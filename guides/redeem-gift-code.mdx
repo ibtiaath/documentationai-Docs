@@ -7,13 +7,17 @@ Gift codes are pre-paid IQD credits that users redeem to top up their wallet. On
 
 ## The flow
 
-<Mermaid>
-sequenceDiagram
-    User->>App: Enters code "GIFT-ABC12345"
-    App->>API: POST /users/redeem-gift-card/
-    API-->>App: 200, { amount, new_balance }
-    App->>User: "25,000 IQD added"
-</Mermaid>
+<Steps>
+  <Step title="Enter the code">
+    The user submits a gift code in the format `GIFT-XXXXXXXX`.
+  </Step>
+  <Step title="Redeem the code">
+    POST `/api/v1/users/redeem-gift-card/` with the code and the current access token.
+  </Step>
+  <Step title="Show the new balance">
+    Refresh the user profile and display the updated wallet balance.
+  </Step>
+</Steps>
 
 ## Endpoint
 
@@ -127,11 +131,11 @@ Authorization: Bearer <access-token>
 
 ## Related
 
-<Cards>
+<Columns cols={2}>
   <Card title="Wayl payments" href="/guides/wayl-deposit" icon="credit-card">
     Top up with a Visa or Mastercard instead of a gift code.
   </Card>
   <Card title="Coupons" href="/api-reference/coupons" icon="tag">
     Apply a discount code at checkout (different from gift codes).
   </Card>
-</Cards>
+</Columns>

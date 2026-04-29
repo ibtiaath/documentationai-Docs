@@ -5,23 +5,23 @@ description: Add wallet balance using the Wayl payment gateway from a card.
 
 Wayl is the Ibtiaath payment gateway for Iraq. Users top up their wallet by entering their card details on a hosted Wayl checkout page; on success, the balance is credited automatically.
 
-<Callout type="note">
+<Callout kind="note">
   Commission: **2.5% + 600 IQD** for local cards, **3.5% + 600 IQD** for international cards. These are added on top of the deposit amount and shown to the user before they confirm.
 </Callout>
 
 ## The flow
 
-<Mermaid>
-sequenceDiagram
-    Client->>API: POST /payments/wayl/deposit/
-    API-->>Client: payment_link_url + reference_id
-    Client->>Wayl: Redirect to checkout
-    Wayl-->>Client: 3DS challenge → success
-    Wayl->>API: Webhook (signed)
-    API-->>API: Credit user's wallet
-    Client->>API: GET /payments/wayl/status/{reference_id}/
-    API-->>Client: 200, status: completed
-</Mermaid>
+<Steps>
+  <Step title="Start the deposit">
+    POST `/api/v1/payments/wayl/deposit/` to create a hosted checkout link.
+  </Step>
+  <Step title="Complete checkout">
+    The user finishes the Wayl checkout and returns to the app.
+  </Step>
+  <Step title="Confirm the status">
+    Poll the status endpoint until the payment is completed.
+  </Step>
+</Steps>
 
 ## Steps
 
@@ -179,11 +179,11 @@ GET /api/v1/payments/wayl/admin/refund-status/{refund_id}/
 
 ## Related
 
-<Cards>
+<Columns cols={2}>
   <Card title="Redeem a gift code" href="/guides/redeem-gift-code" icon="gift">
     Alternative top-up method without card commissions.
   </Card>
   <Card title="Errors" href="/errors" icon="circle-alert">
     Common failure modes and how to handle them.
   </Card>
-</Cards>
+</Columns>

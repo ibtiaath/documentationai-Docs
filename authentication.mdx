@@ -16,16 +16,16 @@ The Ibtiaath API authenticates with **JWT bearer tokens**. Most endpoints requir
 ## Authentication flows
 
 <Columns cols="2">
-  <Card title="Email + password (with OTP)" href="#email-password" horizontal="false">
+  <Card title="Email + password (with OTP)" href="#email-password">
     Default flow for new users.
   </Card>
-  <Card title="Google Sign-In" href="#google-sign-in" horizontal="false">
+  <Card title="Google Sign-In" href="#google-sign-in">
     OAuth via Google ID token.
   </Card>
-  <Card title="Apple Sign-In" href="#apple-sign-in" horizontal="false">
+  <Card title="Apple Sign-In" href="#apple-sign-in">
     OAuth via Apple identity token.
   </Card>
-  <Card title="Password reset" href="#password-reset" horizontal="false">
+  <Card title="Password reset" href="#password-reset">
     OTP-based reset flow.
   </Card>
 </Columns>
@@ -86,7 +86,7 @@ A 3-step flow: register → verify OTP → complete profile.
     }
     ```
 
-    <Callout type="note">
+    <Callout kind="note">
       OTP expires in 10 minutes. Maximum 3 attempts. Resend cooldown is 15 seconds.
     </Callout>
   </Step>

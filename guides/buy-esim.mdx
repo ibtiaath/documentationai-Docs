@@ -7,17 +7,33 @@ eSIM data plans are provisioned through Airalo. The user picks a country, select
 
 ## The flow
 
-<Mermaid>
-sequenceDiagram
-    Client->>API: GET /esim/countries/
-    API-->>Client: list of countries
-    Client->>API: GET /esim/packages/?country=TR
-    API-->>Client: packages (1GB, 5GB, ...)
-    Client->>API: POST /esim/orders/create/
-    API-->>Client: 201, order + payment URL
-    Client->>API: GET /esim/orders/{ref}/
-    API-->>Client: 200, QR code + activation code
-</Mermaid>
+<Steps>
+  <Step title="Fetch countries and packages">
+    ```http
+    GET /api/v1/esim/countries/
+    GET /api/v1/esim/packages/?country=TR
+    ```
+
+    First load the available countries, then fetch the packages for the selected country.
+  </Step>
+
+  <Step title="Create and pay for the order">
+    ```http
+    POST /api/v1/esim/orders/create/
+    Authorization: Bearer <access-token>
+    ```
+
+    The API returns the order reference and payment details.
+  </Step>
+
+  <Step title="Poll for activation details">
+    ```http
+    GET /api/v1/esim/orders/{ref}/
+    ```
+
+    Keep polling until the order becomes active and the QR code is available.
+  </Step>
+</Steps>
 
 ## Steps
 
@@ -179,11 +195,11 @@ Returns remaining data and validity:
 
 ## Related
 
-<Cards>
-  <Card title="My orders" href="/api-reference/esim/orders-my">
+<Columns cols={2}>
+  <Card title="My orders" href="/api-reference/esim/orders-my" icon="list">
     List all eSIM orders for the current user.
   </Card>
   <Card title="Wayl payment" href="/guides/wayl-deposit" icon="credit-card">
     Pay with Visa/Mastercard instead of the wallet.
   </Card>
-</Cards>
+</Columns>

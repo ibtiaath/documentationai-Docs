@@ -56,6 +56,22 @@
             "path": "use-with-ai"
           },
           {
+            "title": "Components",
+            "path": "components"
+          },
+          {
+            "title": "Concepts",
+            "path": "concepts"
+          },
+          {
+            "title": "Help Center",
+            "path": "help-center"
+          },
+          {
+            "title": "Changelog",
+            "path": "changelog"
+          },
+          {
             "group": "Guides",
             "pages": [
               {
