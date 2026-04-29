@@ -12,15 +12,21 @@ This guide takes you from zero to a working authenticated request in under 5 min
 
 ## The flow
 
-<Mermaid>
-sequenceDiagram
-    Client->>API: POST /users/register/
-    API-->>Client: 201, OTP sent to email
-    Client->>API: POST /users/verify-otp/
-    API-->>Client: 200, access + refresh tokens
-    Client->>API: GET /users/me/ (with Bearer token)
-    API-->>Client: 200, user profile
-</Mermaid>
+<Callout kind="info">
+  Flow: register a user, verify the OTP, then make an authenticated request.
+</Callout>
+
+<Steps>
+  <Step title="Register a new account">
+    POST to `/users/register/` to create the account and send a 6-digit OTP to the email address.
+  </Step>
+  <Step title="Verify the OTP">
+    POST to `/users/verify-otp/` with the email and OTP code to receive access and refresh tokens.
+  </Step>
+  <Step title="Call a protected endpoint">
+    Use the access token in the `Authorization: Bearer <token>` header to request `/users/me/`.
+  </Step>
+</Steps>
 
 ## Steps
 
@@ -187,14 +193,14 @@ sequenceDiagram
 
 ## What's next
 
-<Cards>
-  <Card title="Authentication in depth" href="/authentication" icon="key">
+<Columns cols="3">
+  <Card title="Authentication in depth" href="/authentication" icon="key" horizontal="false">
     Google/Apple sign-in, password reset, cookie-based auth for web dashboards.
   </Card>
-  <Card title="Apply to a program" href="/guides/apply-program" icon="graduation-cap">
+  <Card title="Apply to a program" href="/guides/apply-program" icon="graduation-cap" horizontal="false">
     The first real flow most integrations need.
   </Card>
-  <Card title="Errors" href="/errors" icon="circle-alert">
+  <Card title="Errors" href="/errors" icon="circle-alert" horizontal="false">
     What every status code means and how to handle it.
   </Card>
-</Cards>
+</Columns>

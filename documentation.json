@@ -40,32 +40,12 @@
             "path": "quickstart"
           },
           {
-            "title": "Concepts",
-            "path": "concepts"
-          },
-          {
-            "title": "Components",
-            "path": "components"
-          },
-          {
             "title": "Authentication",
             "path": "authentication"
           },
           {
             "title": "Errors",
             "path": "errors"
-          },
-          {
-            "title": "Help Center",
-            "path": "help-center"
-          },
-          {
-            "title": "Notice",
-            "path": "notice"
-          },
-          {
-            "title": "Changelog",
-            "path": "changelog"
           },
           {
             "title": "Rate Limits",
