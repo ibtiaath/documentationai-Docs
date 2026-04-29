@@ -23,7 +23,17 @@
             "openapi": "api-reference/openapi.yaml"
           }
         ]
+      },
+      {
+        "tab": "doc",
+        "pages": [
+          {
+            "title": "Overview",
+            "path": "overview"
+          }
+        ]
       }
-    ]
+    ],
+    "pages": []
   }
 }
