@@ -28,8 +28,81 @@
         "tab": "doc",
         "pages": [
           {
+            "title": "Introduction",
+            "path": "introduction"
+          },
+          {
             "title": "Overview",
             "path": "overview"
+          },
+          {
+            "title": "Quickstart",
+            "path": "quickstart"
+          },
+          {
+            "title": "Concepts",
+            "path": "concepts"
+          },
+          {
+            "title": "Components",
+            "path": "components"
+          },
+          {
+            "title": "Authentication",
+            "path": "authentication"
+          },
+          {
+            "title": "Errors",
+            "path": "errors"
+          },
+          {
+            "title": "Help Center",
+            "path": "help-center"
+          },
+          {
+            "title": "Notice",
+            "path": "notice"
+          },
+          {
+            "title": "Changelog",
+            "path": "changelog"
+          },
+          {
+            "title": "Rate Limits",
+            "path": "rate-limits"
+          },
+          {
+            "title": "Use with AI",
+            "path": "use-with-ai"
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              {
+                "title": "Apply Program",
+                "path": "guides/apply-program"
+              },
+              {
+                "title": "Book Flight",
+                "path": "guides/book-flight"
+              },
+              {
+                "title": "Buy eSIM",
+                "path": "guides/buy-esim"
+              },
+              {
+                "title": "Order Translation",
+                "path": "guides/order-translation"
+              },
+              {
+                "title": "Redeem Gift Code",
+                "path": "guides/redeem-gift-code"
+              },
+              {
+                "title": "Wayl Deposit",
+                "path": "guides/wayl-deposit"
+              }
+            ]
           }
         ]
       }
